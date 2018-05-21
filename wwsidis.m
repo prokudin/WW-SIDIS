@@ -11,7 +11,8 @@ Print["_________________________________________________________________________
 
 (*BeginPackage["wwsidis`",{"mstwpdf`"}];*)
 BeginPackage["wwsidis`"];
-(*f1u::usage="f1u[x_,Q2_ ] is the unpolarised collinear PDF for u quark";*)
+f1u::usage="f1u[x_,Q2_ ] is the unpolarised collinear PDF for u quark";
+f1d::usage="f1d[x_,Q2_ ] is the unpolarised collinear PDF for d quark";
 
 
 Begin["`Private`"];
@@ -42,10 +43,6 @@ Begin["`Private`"];
 (*ubhminus=Interpolation[Table[{{DSShminus[[i,1]],DSShminus[[i,2]]},DSShminus[[i,6]]},{i,1,Length[DSShminus]}],InterpolationOrder->{3,3}];*)
 (*dbhminus=Interpolation[Table[{{DSShminus[[i,1]],DSShminus[[i,2]]},DSShminus[[i,7]]},{i,1,Length[DSShminus]}],InterpolationOrder->{3,3}];*)
 (*sbhminus=Interpolation[Table[{{DSShminus[[i,1]],DSShminus[[i,2]]},DSShminus[[i,8]]},{i,1,Length[DSShminus]}],InterpolationOrder->{3,3}];*)
-
-
-(* ::Input:: *)
-(*Plot[{z uhplus[z,3.],z dhplus[z,3.]},{z,0.01,1}]*)
 
 
 (* ::Section::Closed:: *)
@@ -91,10 +88,6 @@ Begin["`Private`"];
 (**)
 
 
-(* ::Input:: *)
-(*Plot[{x up[x,1.],x dn[x,1.]},{x,0.01,0.99}]*)
-
-
 (* ::Section::Closed:: *)
 (*Read and interpolate helicity collinear distribution functions. Gluck:1998xa*)
 
@@ -111,10 +104,6 @@ Begin["`Private`"];
 (*g1ubar=Interpolation[Table[{{g1param[[i,1]],g1param[[i,2]]},g1param[[i,6]]},{i,1,Length[g1param]}],InterpolationOrder->{3,3}];*)
 (*g1dbar=Interpolation[Table[{{g1param[[i,1]],g1param[[i,2]]},g1param[[i,7]]},{i,1,Length[g1param]}],InterpolationOrder->{3,3}];*)
 (*g1sbar=Interpolation[Table[{{g1param[[i,1]],g1param[[i,2]]},g1param[[i,8]]},{i,1,Length[g1param]}],InterpolationOrder->{3,3}];*)
-
-
-(* ::Input:: *)
-(*Plot[{x*g1u[x,1.],x*g1d[x,1.]},{x,0.001,1}]*)
 
 
 (* ::Section::Closed:: *)
@@ -141,15 +130,11 @@ Begin["`Private`"];
 
 
 (* ::Chapter:: *)
-(*8 "basis" functions Subscript[f, 1], Subscript[D, 1], Subscript[h, 1], Subscript[g, 1], *)
-(*\!\(\*SubsuperscriptBox[\(H\), \(1\), \(\[UpTee]\)]\), \!\( *)
-(*\*SubsuperscriptBox[\(f\), \(1  T\), \(\[UpTee]\)], *)
-(*\*SubsuperscriptBox[\(h\), \(1  T\), \(\[UpTee]\)]\), *)
-(*\!\(\*SubsuperscriptBox[\(h\), \(1\), \(\[UpTee]\)]\)*)
+(*8 "basis" functions *)
 
 
 (* ::Section::Closed:: *)
-(*Subscript[f, 1]*)
+(*f1*)
 
 
 (* ::Input:: *)
@@ -175,19 +160,6 @@ Begin["`Private`"];
 (*f1sdbarTMD[x_,Q2_,kt_ ]:= sbar[x,Q2]1/(\[Pi] avk) Exp[-kt^2/avk];*)
 (**)
 (**)
-
-
-(* ::Input:: *)
-(*Plot[{x f1u[x,1.7], x f1d[x,1.7]},{x,0.001,0.99}]*)
-
-
-(* ::Input:: *)
-(*Plot[{f1uTMD[0.1,1.,kt],f1dTMD[0.1,1.,kt]},{kt,0,1}]*)
-
-
-(* ::Input:: *)
-(**)
-(*f1plot =Plot[{x f1u[x,2.4],x f1d[x,2.4]},{x,0.01,1},Frame-> True,FrameTicks-> {{Automatic,None},{Automatic,None}},PlotRange->{{0,1},{0,1}},PlotStyle->{{Thick,Red},{Thick,Blue},{Thick,Red,Dashed},{Thick,Blue,Dashed}}, FrameLabel->{"x","\!\(\*SubsuperscriptBox[\(xf\), \(1\), \(q\)]\)(x)"},BaseStyle->{FontSize->12,FontFamily->"Arial"},PlotLegends->Placed[{"u","d","\!\(\*OverscriptBox[\(u\), \(_\)]\)","\!\(\*OverscriptBox[\(d\), \(_\)]\)"},{0.7,0.7}]]*)
 
 
 (* ::Section::Closed:: *)
