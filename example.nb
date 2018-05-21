@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     40039,        800]
-NotebookOptionsPosition[     39185,        766]
-NotebookOutlinePosition[     39808,        790]
-CellTagsIndexPosition[     39720,        785]
+NotebookDataLength[     40110,        800]
+NotebookOptionsPosition[     39255,        766]
+NotebookOutlinePosition[     39878,        790]
+CellTagsIndexPosition[     39789,        785]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -42,11 +42,11 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{"?", "f1u"}]], "Input",
  CellChangeTimes->{{3.735924556328092*^9, 3.7359245612306356`*^9}, 
-   3.735924683981616*^9}],
+   3.735924683981616*^9, {3.7359293169521646`*^9, 3.73592934874378*^9}}],
 
 Cell["wwsidis`f1u", "Print", "PrintUsage",
- CellChangeTimes->{3.735924685067629*^9},
- CellTags->"Info9813735903085-2516737"]
+ CellChangeTimes->{3.735929324485177*^9},
+ CellTags->"Info10323735907724-2516737"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -301,7 +301,7 @@ NpZP3yEmvYvH3JXJ/vq9NOLNbhOXI733sFRZuONO5GYL3yQW0v574KLOQtWC
 cUeevDcRUDo/TtNgYZfIHa+0BU8iduTmw/GdLBxWurC8o+4CITFPTJ7bzcLi
 iyHhN9N2xMt1bHtHCDJ+U43tuvmmRMS0yRlnHRbY/v/zf+GnS5c=
          "]]},
-       Annotation[#, "Charting`Private`Tag$11786299#2"]& ]}, {}, {}}, InsetBox[
+       Annotation[#, "Charting`Private`Tag$11793707#2"]& ]}, {}, {}}, InsetBox[
      TemplateBox[{
       "\"u\"","\"d\"","\"\\!\\(\\*OverscriptBox[\\(u\\), \\(_\\)]\\)\"",
        "\"\\!\\(\\*OverscriptBox[\\(d\\), \\(_\\)]\\)\""},
@@ -708,7 +708,7 @@ NpZP3yEmvYvH3JXJ/vq9NOLNbhOXI733sFRZuONO5GYL3yQW0v574KLOQtWC
 cUeevDcRUDo/TtNgYZfIHa+0BU8iduTmw/GdLBxWurC8o+4CITFPTJ7bzcLi
 iyHhN9N2xMt1bHtHCDJ+U43tuvmmRMS0yRlnHRbY/v/zf+GnS5c=
            "]]}, 
-         "Charting`Private`Tag$11786299#2"]}}, {}, {}}, {
+         "Charting`Private`Tag$11793707#2"]}}, {}, {}}, {
      DisplayFunction -> Identity, Ticks -> {Automatic, Automatic}, 
       AxesOrigin -> {0, 0}, 
       FrameTicks -> {{Automatic, None}, {Automatic, None}}, 
@@ -760,12 +760,12 @@ iyHhN9N2xMt1bHtHCDJ+U43tuvmmRMS0yRlnHRbY/v/zf+GnS5c=
   Editable->True,
   SelectWithContents->False,
   Selectable->True]], "Output",
- CellChangeTimes->{3.735924605174024*^9}]
+ CellChangeTimes->{3.735924605174024*^9, 3.735929287356824*^9}]
 }, Open  ]]
 }, Open  ]]
 },
 WindowSize->{1074, 857},
-WindowMargins->{{221, Automatic}, {Automatic, 24}},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
 Magnification:>1.25 Inherited,
 FrontEndVersion->"11.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (September \
 21, 2016)",
@@ -777,14 +777,14 @@ StyleDefinitions->FrontEnd`FileName[{"Report"}, "StandardReport.nb",
 (* Internal cache information *)
 (*CellTagsOutline
 CellTagsIndex->{
- "Info9813735903085-2516737"->{
-  Cell[1440, 46, 124, 2, 53, "Print",
-   CellTags->"Info9813735903085-2516737"]}
+ "Info10323735907724-2516737"->{
+  Cell[1487, 46, 125, 2, 53, "Print",
+   CellTags->"Info10323735907724-2516737"]}
  }
 *)
 (*CellTagsIndex
 CellTagsIndex->{
- {"Info9813735903085-2516737", 39615, 779}
+ {"Info10323735907724-2516737", 39683, 779}
  }
 *)
 (*NotebookFileOutline
@@ -793,13 +793,13 @@ Cell[CellGroupData[{
 Cell[580, 22, 522, 10, 664, "Title"],
 Cell[1105, 34, 167, 3, 65, "Input"],
 Cell[CellGroupData[{
-Cell[1297, 41, 140, 3, 65, "Input"],
-Cell[1440, 46, 124, 2, 53, "Print",
- CellTags->"Info9813735903085-2516737"]
+Cell[1297, 41, 187, 3, 51, "Input"],
+Cell[1487, 46, 125, 2, 53, "Print",
+ CellTags->"Info10323735907724-2516737"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1601, 53, 2185, 62, 204, "Input"],
-Cell[3789, 117, 35368, 645, 336, "Output"]
+Cell[1649, 53, 2185, 62, 204, "Input"],
+Cell[3837, 117, 35390, 645, 336, "Output"]
 }, Open  ]]
 }, Open  ]]
 }

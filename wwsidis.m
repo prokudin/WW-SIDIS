@@ -11,7 +11,7 @@ Print["_________________________________________________________________________
 
 (*BeginPackage["wwsidis`",{"mstwpdf`"}];*)
 BeginPackage["wwsidis`"];
-f1u::usage="f1u[x_,Q2_ ] is the unpolarised collinear PDF for u quark";
+(*f1u::usage="f1u[x_,Q2_ ] is the unpolarised collinear PDF for u quark";*)
 
 
 Begin["`Private`"];
