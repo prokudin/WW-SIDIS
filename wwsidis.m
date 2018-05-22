@@ -71,5 +71,190 @@ f1ubarTMD[x_,Q2_,kt_ ]:= upbar[x,Q2]  1/(\[Pi] avk) Exp[-kt^2/avk];
 f1dbarTMD[x_,Q2_ ,kt_]:= dnbar[x,Q2]  1/(\[Pi] avk) Exp[-kt^2/avk];
 f1sTMD[x_,Q2_,kt_ ]:= str[x,Q2]1/(\[Pi] avk) Exp[-kt^2/avk];
 f1sdbarTMD[x_,Q2_,kt_ ]:= sbar[x,Q2]1/(\[Pi] avk) Exp[-kt^2/avk];
+
+(*2005 fit*)
+Clear[avp];
+avp = 0.2;
+(* fragmentation*)
+ 
+D1uTMD[pion_, z_, Q2_, pt_] := If[pion == "pi+", uhplus[z, Q2],If[pion == "pi-", uhminus[z, Q2]]] 1/(\[Pi] avp) Exp[-pt^2/avp]
+D1dTMD[pion_, z_, Q2_, pt_] := If[pion == "pi+", dhplus[z, Q2],If[pion == "pi-", dhminus[z, Q2]]] 1/(\[Pi] avp) Exp[-pt^2/avp]
+D1ubarTMD[pion_, z_, Q2_, pt_] := If[pion == "pi+", ubhplus[z, Q2],If[pion == "pi-", ubhminus[z, Q2]]] 1/(\[Pi] avp) Exp[-pt^2/avp]
+D1dbarTMD[pion_, z_, Q2_, pt_] := If[pion == "pi+", dbhplus[z, Q2],If[pion == "pi-", dbhminus[z, Q2]]] 1/(\[Pi] avp) Exp[-pt^2/avp]
+D1sTMD[pion_, z_, Q2_, pt_] := If[pion == "pi+", shplus[z, Q2],If[pion == "pi-", shminus[z, Q2]]] 1/(\[Pi] avp) Exp[-pt^2/avp]
+D1sbarTMD[pion_, z_, Q2_, pt_] := If[pion == "pi+", sbhplus[z, Q2],If[pion == "pi-", sbhminus[z, Q2]]] 1/(\[Pi] avp) Exp[-pt^2/avp]
+ 
+ 
+D1u[pion_, z_, Q2_ ] := If[pion == "pi+", uhplus[z, Q2], If[pion == "pi-", uhminus[z, Q2]]]
+D1d[pion_, z_, Q2_ ] := If[pion == "pi+", dhplus[z, Q2], If[pion == "pi-", dhminus[z, Q2]]]
+D1ubar[pion_, z_, Q2_ ] := If[pion == "pi+", ubhplus[z, Q2],If[pion == "pi-", ubhminus[z, Q2]]]
+D1dbar[pion_, z_, Q2_ ] := If[pion == "pi+", dbhplus[z, Q2],If[pion == "pi-", dbhminus[z, Q2]]]
+D1s[pion_, z_, Q2_ ] := If[pion == "pi+", shplus[z, Q2],If[pion == "pi-", shminus[z, Q2]]]
+D1sbar[pion_, z_, Q2_ ] := If[pion == "pi+", sbhplus[z, Q2], If[pion == "pi-", sbhminus[z, Q2]]]
+ 
+(*Lattice fit*)
+Clear[avkg];
+avkg = avk 0.76 ;
+
+
+(* Helicity functions with DGLAP Evolution*)
+
+
+g1uTMD[x_, Q2_, kt_] := g1u[x, Q2] 1/(\[Pi] avkg) Exp[-kt^2/avkg];
+g1dTMD[x_, Q2_, kt_] := g1d[x, Q2] 1/(\[Pi] avkg) Exp[-kt^2/avkg];
+ 
+(*2013 fit*)
+Clear[NuT, NdT, alphaT, betaT];
+NuT = 0.46;
+NdT = -1.000;
+alphaT = 1.11;
+betaT = 3.64;
+
+(* Transversity function with DGLAP Evolution*)
+
+h1u[x_, Q2_] := (NuT x^alphaT (1 - x)^betaT (alphaT + betaT)^(alphaT + betaT)/((alphaT^alphaT) (betaT^betaT))) sb1u[x, Q2];
+h1d[x_, Q2_] := (NdT x^alphaT (1 - x)^betaT (alphaT + betaT)^(alphaT + betaT)/((alphaT^alphaT) (betaT^betaT))) sb1d[x, Q2];
+
+h1uTMD[x_, Q2_, kt_] := h1u[x, Q2] 1/(\[Pi] avk) Exp[-kt^2/avk];
+h1dTMD[x_, Q2_, kt_] := h1d[x, Q2] 1/(\[Pi] avk) Exp[-kt^2/avk];
+
+(*2013 fit*)
+Clear[MC, NCfav, NCunf, alphaC, betaC, Mh];
+MC = Sqrt[1.5];
+NCfav = 0.49;
+NCunf = -1.000;
+alphaC = 1.06;
+betaC = 0.07;
+Mh = 0.135;
+
+(*Collins function with DGLAP Evolution*)
+
+H1perpFavHalfMoment[x_, Q2_] := Sqrt[2 E] (NCfav x^alphaC (1 - x)^betaC (alphaC + betaC)^(alphaC + betaC)/((alphaC^alphaC) (betaC^betaC))) D1u["pi+", x, Q2]/4 Sqrt[(\[Pi] avp)/(MC^2 + avp)^3];
+H1perpUnfHalfMoment[x_, Q2_] := Sqrt[2 E] (NCunf x^alphaC (1 - x)^betaC (alphaC + betaC)^(alphaC + betaC)/((alphaC^alphaC) (betaC^betaC))) D1d["pi+", x, Q2]/4 Sqrt[(\[Pi] avp)/(MC^2 + avp)^3];
+
+H1perpFavFirstMoment[x_, Q2_] := Sqrt[E/2] (NCfav x^alphaC (1 - x)^betaC (alphaC + betaC)^(alphaC + betaC)/((alphaC^alphaC) (betaC^betaC))) D1u["pi+", x, Q2] (MC^3 avp)/(Mh x (MC^2 + avp)^2);
+H1perpUnfFirstMoment[x_, Q2_] := Sqrt[E/2] (NCunf x^alphaC (1 - x)^betaC (alphaC + betaC)^(alphaC + betaC)/((alphaC^alphaC) (betaC^betaC))) D1d["pi+", x, Q2] (MC^3 avp)/(Mh x (MC^2 + avp)^2);
+
+H1perpFavTMD[x_, Q2_, kt_] := (x Mh)/MC Exp[-kt^2/MC^2] Sqrt[2 E] (NCfav x^alphaC (1 - x)^betaC (alphaC + betaC)^(alphaC + betaC)/((alphaC^alphaC) (betaC^betaC))) D1u["pi+", x, Q2] 1/(\[Pi] avp) Exp[-kt^2/avp];
+H1perpUnfTMD[x_, Q2_, kt_] := (x Mh)/MC Exp[-kt^2/MC^2] Sqrt[2 E] (NCunf x^alphaC (1 - x)^betaC (alphaC + betaC)^(alphaC + betaC)/((alphaC^alphaC) (betaC^betaC))) D1d["pi+", x, Q2] 1/(\[Pi] avp) Exp[-kt^2/avp];
+
+H1perpFirstMoment[quark_, pion_, x_, Q2_] := If[(quark == "u" && pion == "pi+") || (quark == "bard" && pion == "pi+") || (quark == "d" && pion == "pi-") || (quark == "baru" && pion == "pi-"),H1perpFavFirstMoment[x, Q2], H1perpUnfFirstMoment[x, Q2]]
+ 
+(*2015 fit*)
+Clear[MC5, NCfav5, NCunf5, alphaC5,  Mh5, avp5];
+MC5 = Sqrt[0.28];
+NCfav5 = 0.9;
+NCunf5 = -0.37;
+alphaC5 = 2.02;
+
+Mh5 = 0.135;
+avp5 = 0.12;
+
+MC5*MC5*avp5 /(avp5 + MC5*MC5)
+
+(*Collins function with DGLAP Evolution*)
+
+H1perpFavFirstMoment5[x_, Q2_] := Sqrt[E/2] (NCfav5 x^alphaC5) D1u["pi+", x, Q2] (MC5^3 avp5)/(Mh5 x (MC5^2 + avp5)^2);
+H1perpUnfFirstMoment5[x_, Q2_] := Sqrt[ E/2] (NCunf5) D1d["pi+", x, Q2] (MC5^3 avp5)/(Mh5 x (MC5^2 + avp5)^2);
+H1perpFirstMoment5[quark_, pion_, x_, Q2_] := If[(quark == "u" && pion == "pi+") || (quark == "bard" && pion == "pi+") || (quark == "d" && pion == "pi-") || (quark == "baru" && pion == "pi-"),H1perpFavFirstMoment5[x, Q2], H1perpUnfFirstMoment5[x, Q2]]
+ 
+(*2011 fit*)
+
+Clear[Ms, avks, Nu, Nusea, Nd, Ndsea, Nst, Nstbar, alphauv, alphadv, asea, beta, Mp];
+Ms = Sqrt[0.19];
+avks = avk Ms^2/(avk + Ms^2);
+Nu = 0.4;
+Nusea = 0.;
+Nd = -0.97;
+Ndsea = 0.;
+Nst = 0.;
+Nstbar = 0.;
+alphauv = 0.35;
+alphadv = 0.44;
+asea = 1.;
+beta = 3.46;
+betauv = 2.6;
+betadv = 0.9;
+avPTs[z_] := Sqrt[avp^2 + avks^2 z^2]
+Mp = 0.938;
+
+(* Sivers function with DGLAP Evolution*)
+
+usiv[x_, Q2_] := (Nu x^alphauv (1 - x)^betauv (alphauv + betauv)^(alphauv + betauv)/((alphauv^alphauv) ( betauv^betauv))) up[x, Q2]
+dsiv[x_, Q2_] := (Nd x^alphadv (1 - x)^betadv (alphadv + betadv)^(alphadv + betadv)/((alphadv^alphadv) ( betadv^betadv))) dn[x, Q2]
+ubarsiv[x_, Q2_] := (Nusea x^asea (1 - x)^beta (asea + beta)^(asea + beta)/((asea^asea) (beta^beta))) upbar[x, Q2]
+dbarsiv[x_, Q2_] := (Ndsea x^asea (1 - x)^beta (asea + beta)^(asea + beta)/((asea^asea) (beta^beta))) dnbar[x, Q2]
+ssiv[x_, Q2_] := (Nst x^asea (1 - x)^beta (asea + beta)^(asea + beta)/((asea^asea) ( beta^beta))) str[x, Q2]
+sbarsiv[x_, Q2_] := (Nstbar x^asea (1 - x)^beta (asea + beta)^(asea + beta)/((asea^asea) (beta^beta))) sbar[x, Q2]
+ 
+(*Sivers function with DGLAP Evolution*)
+
+f1TperpuFirstMoment[x_, Q2_] := -Sqrt[ E/2] 1/(Mp Ms) usiv[x, Q2] avks^2/avk ;
+f1TperpdFirstMoment[x_, Q2_] := -Sqrt[ E/2] 1/(Mp Ms) dsiv[x, Q2] avks^2/avk;
+f1TperpubarFirstMoment[x_, Q2_] := -Sqrt[ E/2] 1/(Mp Ms) ubarsiv[x, Q2] avks^2/avk ;
+f1TperpdbarFirstMoment[x_, Q2_] := -Sqrt[ E/2] 1/(Mp Ms) dbarsiv[x, Q2] avks^2/avk;
+f1TperpsFirstMoment[x_, Q2_] := -Sqrt[ E/2] 1/(Mp Ms) ssiv[x, Q2] avks^2/avk ;
+f1TperpsbFirstMoment[x_, Q2_] := -Sqrt[ E/2] 1/(Mp Ms) sbarsiv[x, Q2] avks^2/avk;
+
+
+f1TperpuTMD[x_, Q2_, kt_] := -(Mp/Ms) Sqrt[2 E] usiv[x, Q2] 1/(\[Pi] avk) Exp[-kt^2/avks];
+f1TperpdTMD[x_, Q2_, kt_] := -(Mp/Ms) Sqrt[2 E] dsiv[x, Q2] 1/(\[Pi] avk) Exp[-kt^2/avks];
+f1TperpubarTMD[x_, Q2_, kt_] := -(Mp/Ms) Sqrt[2 E] ubarsiv[x, Q2] 1/(\[Pi] avk) Exp[-kt^2/avks];
+f1TperpdbarTMD[x_, Q2_, kt_] := -(Mp/Ms) Sqrt[2 E] dbarsiv[x, Q2] 1/(\[Pi] avk) Exp[-kt^2/avks];
+f1TperpsTMD[x_, Q2_, kt_] := -(Mp/Ms) Sqrt[2 E] ssiv[x, Q2] 1/(\[Pi] avk) Exp[-kt^2/avks];
+f1TperpsbTMD[x_, Q2_, kt_] := -(Mp/Ms) Sqrt[2 E] sbarsiv[x, Q2] 1/(\[Pi] avk) Exp[-kt^2/avks];
+ 
+ 
+(*2015 fit*)
+Clear[MTT, avkTT, NuTT, NdTT, alphaTT, betaTT];
+MTT = Sqrt[0.18];
+avkTT = avk MTT^2/(avk + MTT^2);
+NuTT = 1;
+NdTT = -1;
+alphaTT = 2.5;
+betaTT = 2.;
+(* Pretzelosity function with DGLAP Evolution*)
+
+huTT[x_, Q2_] := E (NuTT x^alphaTT (1 - x)^betaTT (alphaTT + betaTT)^(alphaTT + betaTT)/((alphaTT^alphaTT) (betaTT^betaTT))) (up[x, Q2] - g1u[x, Q2])
+hdTT[x_, Q2_] := E (NdTT x^alphaTT (1 - x)^betaTT (alphaTT + betaTT)^(alphaTT + betaTT)/((alphaTT^alphaTT) (betaTT^betaTT))) (dn[x, Q2] - g1d[x, Q2])
+
+
+(*Pretzelosity function with DGLAP Evolution*)
+
+h1TperpuFirstMoment[x_, Q2_] := 1/(2 MTT^2) huTT[x, Q2] avkTT^2/avk ;
+h1TperpdFirstMoment[x_, Q2_] := 1/(2 MTT^2) hdTT[x, Q2] avkTT^2/avk;
+
+
+
+h1TperpuTMD[x_, Q2_, kt_] := Mp^2/MTT^2  huTT[x, Q2] 1/(\[Pi] avk) Exp[-kt^2/avkTT];
+h1TperpdTMD[x_, Q2_, kt_] := Mp^2/MTT^2  hdTT[x, Q2] 1/(\[Pi] avk) Exp[-kt^2/avkTT];
+
+
+h1TperpuSecondMoment[x_, Q2_] := 1/(2 Mp^2 MTT^2) huTT[x, Q2] avkTT^3/avk ;
+h1TperpdSecondMoment[x_, Q2_] := 1/(2 Mp^2 MTT^2) hdTT[x, Q2] avkTT^3/avk;
+ 
+(*2015 fit*)
+Clear[MBM, avkBM, NuBM, NdBM];
+MBM = Sqrt[0.1];
+avkBM = avk MBM^2/(avk + MBM^2);
+NuBM = -0.49;
+NdBM = -1;
+
+(* Boer-Mulders function with DGLAP Evolution*)
+
+h1perpu[x_, Q2_] := NuBM up[x, Q2]
+h1perpd[x_, Q2_] := NdBM dn[x, Q2]
+
+
+(*Boer-Mulders function with DGLAP Evolution*)
+
+h1perpuFirstMoment[x_, Q2_] := -Sqrt[ E/2] 1/(Mp MBM) h1perpu[x, Q2] avkBM^2/avk;
+h1perpdFirstMoment[x_, Q2_] := -Sqrt[ E/2] 1/(Mp MBM) h1perpd[x, Q2] avkBM^2/avk;
+
+
+h1perpuTMD[x_, Q2_, kt_] := -Sqrt[ 2 E] Mp/MBM Exp[-kt^2/avkBM] h1perpu[x, Q2]/(\[Pi] avk);
+h1perpdTMD[x_, Q2_, kt_] := -Sqrt[ 2 E] Mp/MBM Exp[-kt^2/avkBM] h1perpd[x, Q2]/(\[Pi] avk);
+
+ 
 End[];
 EndPackage[];
