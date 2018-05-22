@@ -9,6 +9,12 @@ Print["Contains the following functions: "];
 BeginPackage["wwsidis`"];
 f1u::usage="f1u[x_,Q2_ ] is the unpolarised collinear PDF for u quark";
 f1d::usage="f1d[x_,Q2_ ] is the unpolarised collinear PDF for d quark";
+h1Lu::usage="f1u[x_,Q2_ ] is the unpolarised collinear PDF for u quark";
+h1Ld::usage="f1d[x_,Q2_ ] is the unpolarised collinear PDF for d quark";
+g2::usage="f1u[x_,Q2_ ] is the unpolarised collinear PDF for u quark";
+g2n::usage="f1d[x_,Q2_ ] is the unpolarised collinear PDF for d quark";
+g1Tperpu::usage="f1u[x_,Q2_ ] is the unpolarised collinear PDF for u quark";
+g1Tperpd::usage="f1d[x_,Q2_ ] is the unpolarised collinear PDF for d quark";
 ?f1u;
 ?f1d;
 Begin["`Private`"];
@@ -255,6 +261,30 @@ h1perpdFirstMoment[x_, Q2_] := -Sqrt[ E/2] 1/(Mp MBM) h1perpd[x, Q2] avkBM^2/avk
 h1perpuTMD[x_, Q2_, kt_] := -Sqrt[ 2 E] Mp/MBM Exp[-kt^2/avkBM] h1perpu[x, Q2]/(\[Pi] avk);
 h1perpdTMD[x_, Q2_, kt_] := -Sqrt[ 2 E] Mp/MBM Exp[-kt^2/avkBM] h1perpd[x, Q2]/(\[Pi] avk);
 
+(*WW-type relations*)
+ 
+h1Lu[x_, Q_] := -x^2 NIntegrate[h1u[y, Q]/y^2, {y, x, 1.}];
+h1Ld[x_, Q_] := -x^2  NIntegrate[h1d[y, Q]/y^2, {y, x, 1.}];
+
+gTu[x_, Q2_] := NIntegrate[g1u[y, Q2]/y, {y, x, 1.}];
+gTd[x_, Q2_] := NIntegrate[g1d[y, Q2]/y, {y, x, 1.}];
+gTubar[x_, Q2_] := NIntegrate[g1ubar[y, Q2]/y, {y, x, 1.}];
+gTdbar[x_, Q2_] := NIntegrate[g1dbar[y, Q2]/y, {y, x, 1.}];
+gTs[x_, Q2_] := NIntegrate[g1s[y, Q2]/y, {y, x, 1.}];
+gTsbar[x_, Q2_] := NIntegrate[g1sbar[y, Q2]/y, {y, x, 1.}];
+
+g2[x_, Q2_] := 1/2 * (4./9.  gTu[x, Q2] + 1./9. gTd[x, Q2] + 4./9. gTubar[x, Q2] + 1./9. gTdbar[x, Q2] + 1./9. gTs[x, Q2] + 1./9. gTsbar[x, Q2]) - 1/2 * (4./9. g1u[x, Q2] +  1./9. g1d[x, Q2] + 4./9. g1ubar[x, Q2] + 1./9. g1dbar[x, Q2] + 1./9. g1s[x, Q2] + 1./9. g1sbar[x, Q2]);
+
+g2n[x_, Q2_] := 1/2 * (4./9.  gTd[x, Q2] + 1./9. gTu[x, Q2] + 4./9. gTdbar[x, Q2] + 1./9. gTubar[x, Q2] + 1./9. gTs[x, Q2] + 1./9. gTsbar[x, Q2]) - 1/2 * (4./9. g1d[x, Q2] +  1./9. g1u[x, Q2] + 4./9. g1dbar[x, Q2] + 1./9. g1ubar[x, Q2] + 1./9. g1s[x, Q2] + 1./9. g1sbar[x, Q2]);
+
+g1Tperpu[x_, Q2_] := x NIntegrate[g1u[y, Q2]/y, {y, x, 1.}];
+g1Tperpd[x_, Q2_] := x NIntegrate[g1d[y, Q2]/y, {y, x, 1.}];
+g1Tperpubar[x_, Q2_] := x NIntegrate[g1ubar[y, Q2]/y, {y, x, 1.}];
+g1Tperpdbar[x_, Q2_] := x NIntegrate[g1dbar[y, Q2]/y, {y, x, 1.}];
+g1Tperps[x_, Q2_] := x NIntegrate[g1s[y, Q2]/y, {y, x, 1.}];
+g1Tperpsbar[x_, Q2_] := x NIntegrate[g1sbar[y, Q2]/y, {y, x, 1.}];
+ 
+ 
  
 End[];
 EndPackage[];
