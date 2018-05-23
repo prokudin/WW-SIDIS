@@ -20,14 +20,20 @@ g1Tperpd::usage="f1d[x_,Q2_ ] is the unpolarised collinear PDF for d quark";
 ALL::usage="ALL[pion_, x_, z_, Q2_, PT_] is the ... asymmetry";
 AUTSivers::usage="AUTSivers[pion_, x_, z_, Q2_, PT_] is the Sivers asymmetry";
 AUTCollins::usage="AUTCollins[pion_, x_, z_, Q2_, PT_] is the Collins asymmetry";
- AUTh1tp::usage="AUTh1tp[pion_, x_, z_, Q2_, PT_] is the Pretzelosity asymmetry";
- AUUcos2phi::usage="AUUcos2phi[pion_, x_, z_, Q2_, PT_] is the Boer-Mulders asymmetry";
- ALT::usage="ALT[pion_, x_, z_, Q2_, PT_] is the Double Spin asymmetry";
- AULsin2phi::usage="AULsin2phi[pion_, x_, z_, Q2_, PT_] is the Kotzinian-Mulders asymmetry";
- ALTcosPhi::usage="ALTcosPhi[pion_, x_, z_, Q2_, PT_] is the ... asymmetry";
- AUTCollins::usage="AUTCollins[pion_, x_, z_, Q2_, PT_] is the Collins asymmetry";
- AUTSivers::usage="AUTSivers[pion_, x_, z_, Q2_, PT_] is the Sivers asymmetry";
- AUTCollins::usage="AUTCollins[pion_, x_, z_, Q2_, PT_] is the Collins asymmetry";
+AUTh1tp::usage="AUTh1tp[pion_, x_, z_, Q2_, PT_] is the Pretzelosity asymmetry";
+AUUcos2phi::usage="AUUcos2phi[pion_, x_, z_, Q2_, PT_] is the Boer-Mulders asymmetry";
+ALT::usage="ALT[pion_, x_, z_, Q2_, PT_] is the Double Spin asymmetry";
+AULsin2phi::usage="AULsin2phi[pion_, x_, z_, Q2_, PT_] is the Kotzinian-Mulders asymmetry";
+ALTcosPhi::usage="ALTcosPhi[pion_, x_, z_, Q2_, PT_] is the ... asymmetry";
+AULsinphi::usage="AULsinphi[pion_, x_, z_, Q2_, PT_] is the ... asymmetry";
+ALLcosphi::usage="ALLcosphi[pion_, x_, z_, Q2_, PT_] is the ... asymmetry";
+ALTcos2PhiminusPhiS::usage="ALTcos2PhiminusPhiS[pion_, x_, z_, Q2_, PT_] is the ... asymmetry";
+AUUcosphi::usage="AUUcosphi[pion_, x_, z_, Q2_, PT_] is the ... asymmetry";
+AUTsinphiS::usage="AUTsinphiS[pion_, x_, z_, Q2_, PT_] is the ... asymmetry";
+AUTsin2PhiminusPhiS::usage="AUTsin2PhiminusPhiS[pion_, x_, z_, Q2_, PT_] is the ... asymmetry";
+AULsin2phiIntegrated::usage="AULsin2phiIntegrated[pion_, x_, z_, Q2_] is the P_T integrated Kotzinian-Mulders asymmetry";
+AUTsin2PhiminusPhiSIntegrated::usage="AUTsin2PhiminusPhiSIntegrated[pion_, x_, z_, Q2_] is the P_T integrated ... asymmetry";
+
 Begin["`Private`"];
 DSShplus= ReadList["./Grids/fragmentationpiplus.dat",Real,RecordLists-> True];
 DSShminus= ReadList["./Grids/fragmentationpiminus.dat",Real,RecordLists-> True];
@@ -441,13 +447,105 @@ ALTcosPhi[pion_, x_, z_, Q2_, PT_] := FLTcosPhi[pion, x, z, Q2, PT]/FUU[pion, x,
 
 ALTcosPhiIntegrated[pion_, x_, z_, Q2_] := FLTcosPhiIntegrated[pion, x, z, Q2]/FUUIntegrated[pion, x, z, Q2];
  
- (*F_{UU}*)
- (*F_{UU}*)
- (*F_{UU}*)
- (*F_{UU}*)
- (*F_{UU}*)
- (*F_{UU}*)
+(*F_{UL}^{Sin[\phi_h]}*)
+avc = MC^2 avp/(MC^2 + avp);
+avkh1l = avk; (* assumption *)
+avULsinphiPT[z_] := avc + avkh1l z^2;
+(* x hL = h_1L^perp(1) *)
 
+GfactorULsinphi[z_, PT_] := (2 (Mp^2) )/(\[Pi] avULsinphiPT[z]^2) Exp[(-PT^2/avULsinphiPT[z])]
+AfactorULsinphi[z_] := ( Mh z Sqrt[Pi]  )/ (avULsinphiPT[z]^(1/2))
+
+FULsinphi[pion_, x_, z_, Q2_, PT_] := ((2 Mp)/Sqrt[Q2]) (z PT Mh)/Mp^2 (-2) ((4.0/9.0) h1Lu[x, Q2] H1perpFirstMoment["u", pion, z, Q2] + (1.0/9.0) h1Ld[x, Q2] H1perpFirstMoment["d", pion, z, Q2]) GfactorULsinphi[z, PT]
+
+
+FULsinphiIntegrated[pion_, x_, z_, Q2_] := ((2 Mp)/Sqrt[Q2]) (-2) ((4.0/9.0) h1Lu[x, Q2] H1perpFirstMoment["u", pion, z, Q2] + (1.0/9.0) h1Ld[x, Q2] H1perpFirstMoment["d", pion, z, Q2]) AfactorULsinphi[z]
+
+AULsinphi[pion_, x_, z_, Q2_, PT_] := FULsinphi[pion, x, z, Q2, PT]/FUU[pion, x, z, Q2, PT];
+
+AULsinphiIntegrated[pion_, x_, z_, Q2_] := FULsinphiIntegrated[pion, x, z, Q2]/FUUIntegrated[pion, x, z, Q2];
+ 
+(*F_{LL}^{Cos[\phi_h]}*)
+avLLcosphiPT[z_] := avp + avkg z^2;
+
+GfactorLLcosphi[z_, PT_] := avkg/(\[Pi] avLLcosphiPT[z]^2) Exp[(-PT^2/avLLcosphiPT[z])]
+AfactorLLcosphi[z_] := ( z Sqrt[Pi] avkg)/(2 Mp Sqrt[avLLcosphiPT[z]]) ;
+
+FLLcosphi[pion_, x_, z_, Q2_, PT_] := (-((2 Mp)/Sqrt[Q2])) (z PT)/Mp ((4.0/9.0) g1u[x, Q2] D1u[pion, z, Q2] + (1.0/9.0) g1d[x, Q2] D1d[pion, z, Q2] + (1.0/9.0) g1s[x, Q2] D1s[pion, z, Q2]  + (4.0/9.0) g1ubar[x, Q2] D1ubar[pion, z, Q2] + (1.0/9.0) g1dbar[x, Q2] D1dbar[pion, z, Q2] + (1.0/9.0) g1sbar[x, Q2] D1sbar[pion, z, Q2] ) GfactorLLcosphi[z, PT]
+
+
+FLLcosphiIntegrated[pion_, x_, z_, Q2_] := (-((2 Mp)/Sqrt[Q2])) ((4.0/9.0) g1u[x, Q2] D1u[pion, z, Q2] + (1.0/9.0) g1d[x, Q2] D1d[pion, z, Q2] + (1.0/9.0) g1s[x, Q2] D1s[pion, z, Q2]  + (4.0/9.0) g1ubar[x, Q2] D1ubar[pion, z, Q2] + (1.0/9.0) g1dbar[x, Q2] D1dbar[pion, z, Q2] + (1.0/9.0) g1sbar[x, Q2] D1sbar[pion, z, Q2] ) AfactorLLcosphi[z]
+
+ALLcosphi[pion_, x_, z_, Q2_, PT_] := FLLcosphi[pion, x, z, Q2, PT]/FUU[pion, x, z, Q2, PT];
+
+ALLcosphiIntegrated[pion_, x_, z_, Q2_] := FLLcosphiIntegrated[pion, x, z, Q2]/FUUIntegrated[pion, x, z, Q2];
+ 
+(*F_{LT}^{Cos[2\phi_h-\phi_S]}*)
+avkg1T = avkg; (*assumption*)
+avLTcos2phiPT[z_] := avp + avkg1T z^2;
+
+GLTcos2phi[z_, PT_] := (Mp^2 avkg1T)/(\[Pi] avLTcos2phiPT[z]^3) Exp[(-PT^2/avLTcos2phiPT[z])]
+AfactorLTcos2phi[z_] := -(( z^2 avkg1T)/ avLTcos2phiPT[z])
+
+FLTcos2phi[pion_, x_, z_, Q2_, PT_] := ((2 Mp)/Sqrt[Q2]) (-((z^2 PT^2)/Mp^2)) ((4.0/9.0) g1Tperpu[x, Q2] D1u[pion, z, Q2] + (1.0/9.0) g1Tperpd[x, Q2] D1d[pion, z, Q2] + (1.0/9.0) g1Tperps[x, Q2] D1s[pion, z, Q2]  + (4.0/9.0) g1Tperpubar[x, Q2] D1ubar[pion, z, Q2] + (1.0/9.0) g1Tperpdbar[x, Q2] D1dbar[pion, z, Q2] + (1.0/9.0) g1Tperpsbar[x, Q2] D1sbar[pion, z, Q2] ) GLTcos2phi[z, PT]
+
+
+FLTcos2phiIntegrated[pion_, x_, z_, Q2_] := ((2 Mp)/Sqrt[Q2]) ((4.0/9.0) g1Tperpu[x, Q2] D1u[pion, z, Q2] + (1.0/9.0) g1Tperpd[x, Q2] D1d[pion, z, Q2] + (1.0/9.0) g1Tperps[x, Q2] D1s[pion, z, Q2]  + (4.0/9.0) g1Tperpubar[x, Q2] D1ubar[pion, z, Q2] + (1.0/9.0) g1Tperpdbar[x, Q2] D1dbar[pion, z, Q2] + (1.0/9.0) g1Tperpsbar[x, Q2] D1sbar[pion, z, Q2] ) AfactorLTcos2phi[z]
+
+ALTcos2PhiminusPhiS[pion_, x_, z_, Q2_, PT_] := FLTcos2phi[pion, x, z, Q2, PT]/FUU[pion, x, z, Q2, PT];
+
+ALTcos2PhiminusPhiSIntegrated[pion_, x_, z_, Q2_] := FLTcos2phiIntegrated[pion, x, z, Q2]/FUUIntegrated[pion, x, z, Q2];
+ 
+(*F_{UU}^{cos\phi_h}*)
+avUUcosphi2PT[z_] := avp + avk z^2;
+GfactorUUcosphi2[z_, PT_] := 1/(\[Pi] avUUcosphi2PT[z]) Exp[(-PT^2/avUUcosphi2PT[z])]
+AfactorUUcosphi2[z_] := (  z Sqrt[Pi] avk)/(2 Mp  Sqrt[avUUcosphi2PT[z]]) ;
+
+FUUcosphi[pion_, x_, z_, Q2_, PT_] := (-((2 Mp)/Sqrt[Q2])) (z PT 2 Mp)/avUUcosphi2PT[z] avk/(2 Mp^2) ((4.0/9.0) f1u[x, Q2] D1u[pion, z, Q2] + (1.0/9.0) f1d[x, Q2] D1d[pion, z, Q2] + (1.0/9.0) f1s[x, Q2] D1s[pion, z, Q2]  + (4.0/9.0) f1ubar[x, Q2] D1ubar[pion, z, Q2] + (1.0/9.0) f1dbar[x, Q2] D1dbar[pion, z, Q2] + (1.0/9.0) f1sdbar[x, Q2] D1sbar[pion, z, Q2]) GfactorUUcosphi2[z, PT]
+
+
+FUUcosphiIntegrated[pion_, x_, z_, Q2_] := (-((2 Mp)/Sqrt[Q2])) ((4.0/9.0) f1u[x, Q2] D1u[pion, z, Q2] + (1.0/9.0) f1d[x, Q2] D1d[pion, z, Q2] + (1.0/9.0) f1s[x, Q2] D1s[pion, z, Q2]  + (4.0/9.0) f1ubar[x, Q2] D1ubar[pion, z, Q2] + (1.0/9.0) f1dbar[x, Q2] D1dbar[pion, z, Q2] + (1.0/9.0) f1sdbar[x, Q2] D1sbar[pion, z, Q2]) AfactorUUcosphi2[z]
+
+AUUcosphi[pion_, x_, z_, Q2_, PT_] := FUUcosphi[pion, x, z, Q2, PT]/FUU[pion, x, z, Q2, PT];
+
+AUUcosphiIntegrated[pion_, x_, z_, Q2_] := FUUcosphiIntegrated[pion, x, z, Q2]/FUUIntegrated[pion, x, z, Q2];
+ 
+(*F_{UT}^{Sin[\phi_S]}*)
+avkh1 = avk; (*asumption*)
+avc = MC^2 avp/(MC^2 + avp);
+avUTsinphi2PT[z_] := avc + avkh1 z^2;
+GfactorUTsinphi2[z_, PT_] :=  (1 - PT^2/avUTsinphi2PT[z])/(\[Pi] avUTsinphi2PT[z]) Exp[(-PT^2/avUTsinphi2PT[z])]
+AfactorUTsinphi2[z_] := 0. ;
+
+FUTsinphiS[pion_, x_, z_, Q2_, PT_] := ((2 Mp)/Sqrt[Q2]) (4 z^2 Mh Mp)/avUTsinphi2PT[z] avkh1/(2 Mp^2) ((4.0/9.0) h1u[x, Q2] If[pion == "pi+", H1perpFavFirstMoment[z, Q2], H1perpUnfFirstMoment[z, Q2]] + (1.0/9.0) h1d[x, Q2] If[pion == "pi+", H1perpUnfFirstMoment[z, Q2], H1perpFavFirstMoment[z, Q2]]) GfactorUTsinphi2[z, PT]
+
+
+FUTsinphiSIntegrated[pion_, x_, z_, Q2_] := 0
+
+AUTsinphiS[pion_, x_, z_, Q2_, PT_] := FUTsinphiS[pion, x, z, Q2, PT]/FUU[pion, x, z, Q2, PT];
+
+AUTsinphiSIntegrated[pion_, x_, z_, Q2_] := FUTsinphiSIntegrated[pion, x, z, Q2]/FUUIntegrated[pion, x, z, Q2];
+ 
+(*F_{UT}^{Sin[2\phi_h-\phi_S]}*)
+avUTsin2phi1PT[z_] := avp + avks z^2;
+
+GfactorUTsin2phi1[z_, PT_] := (Mp^2)  /(\[Pi] avUTsin2phi1PT[z]) Exp[(-PT^2/avUTsin2phi1PT[z])]
+AfactorUTsin2phi1[z_] := (Mp^2 z^2)/ avUTsin2phi1PT[z] ;
+
+avkP = avk MTT^2/(avk + MTT^2);
+avc = MC^2 avp/(MC^2 + avp);
+avUTsin2phi2PT[z_] := avc + avkP z^2;
+GfactorUTsin2phi2[z_, PT_] := 1/(\[Pi] avUTsin2phi2PT[z]) Exp[(-PT^2/avUTsin2phi2PT[z])]
+AfactorUTsin2phi2[z_] := (4 Mh Mp z^2)/ avUTsin2phi1PT[z] ;
+
+FUTsin2phi[pion_, x_, z_, Q2_, PT_] := ((2 Mp)/Sqrt[Q2]) (z^2 PT^2)/avUTsin2phi1PT[z]^2 avks/Mp^2 ((4.0/9.0) f1TperpuFirstMoment[x, Q2] D1u[pion, z, Q2] + (1.0/9.0) f1TperpdFirstMoment[x, Q2] D1d[pion, z, Q2] + (1.0/9.0) f1TperpsFirstMoment[x, Q2] D1s[pion, z, Q2]  + (4.0/9.0) f1TperpubarFirstMoment[x, Q2] D1ubar[pion, z, Q2] + (1.0/9.0) f1TperpdbarFirstMoment[x, Q2] D1dbar[pion, z, Q2] + (1.0/9.0) f1TperpsbFirstMoment[x, Q2] D1sbar[pion, z, Q2] ) GfactorUTsin2phi1[z, PT] + ((2 Mp)/Sqrt[Q2]) (z^2 PT^2 4 Mp Mh)/avUTsin2phi2PT[z]^2 (-1) ((4.0/9.0) h1TperpuSecondMoment[x, Q2] H1perpFirstMoment["u", pion, z, Q2] + (1.0/9.0) h1TperpdSecondMoment[x, Q2] H1perpFirstMoment["d", pion, z, Q2]) GfactorUTsin2phi2[z, PT]
+
+
+FUTsin2phiIntegrated[pion_, x_, z_, Q2_] := ((2 Mp)/Sqrt[Q2]) avks/Mp^2 ((4.0/9.0) f1TperpuFirstMoment[x, Q2] D1u[pion, z, Q2] + (1.0/9.0) f1TperpdFirstMoment[x, Q2] D1d[pion, z, Q2] + (1.0/9.0) f1TperpsFirstMoment[x, Q2] D1s[pion, z, Q2]  + (4.0/9.0) f1TperpubarFirstMoment[x, Q2] D1ubar[pion, z, Q2] + (1.0/9.0) f1TperpdbarFirstMoment[x, Q2] D1dbar[pion, z, Q2] + (1.0/9.0) f1TperpsbFirstMoment[x, Q2] D1sbar[pion, z, Q2] ) AfactorUTsin2phi1[z] + ((2 Mp)/Sqrt[Q2]) (-1) ((4.0/9.0) h1TperpuSecondMoment[x, Q2] H1perpFirstMoment["u", pion, z, Q2] + (1.0/9.0) h1TperpdSecondMoment[x, Q2] H1perpFirstMoment["d", pion, z, Q2]) AfactorUTsin2phi2[z]
+
+AUTsin2PhiminusPhiS[pion_, x_, z_, Q2_, PT_] := FUTsin2phi[pion, x, z, Q2, PT]/FUU[pion, x, z, Q2, PT];
+
+AUTsin2PhiminusPhiSIntegrated[pion_, x_, z_, Q2_] := FUTsin2phiIntegrated[pion, x, z, Q2]/FUUIntegrated[pion, x, z, Q2];
  
  
 End[];
