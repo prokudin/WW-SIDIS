@@ -34,6 +34,8 @@ AUTsin2PhiminusPhiS::usage="AUTsin2PhiminusPhiS[pion_, x_, z_, Q2_, PT_] is the 
 AULsin2phiIntegrated::usage="AULsin2phiIntegrated[pion_, x_, z_, Q2_] is the P_T integrated Kotzinian-Mulders asymmetry";
 AUTsin2PhiminusPhiSIntegrated::usage="AUTsin2PhiminusPhiSIntegrated[pion_, x_, z_, Q2_] is the P_T integrated ... asymmetry";
 CrossSectionUU::usage="CrossSectionUU[pion_,x_,z_,Q2_,PT_,energy_,phi_] calculates the differential cross section of unpolarized beam and target";
+CrossSectionUL::usage="CrossSectionUL[pion_,x_,z_,Q2_,PT_,energy_,phi_] calculates the differential cross section of unpolarized beam and longitidunally polarized target";
+CrossSectionLU::usage="CrossSectionLU[pion_,x_,z_,Q2_,PT_,energy_,phi_,helicity_] calculates the differential cross section of longitidunally polarized beam and unpolarized target";
 
 Begin["`Private`"];
 DSShplus= ReadList["./Grids/fragmentationpiplus.dat",Real,RecordLists-> True];
@@ -556,6 +558,14 @@ p4[y_]:=y Sqrt[1-y]/(1-y+y^2/2);
 coupling=1/137;
 y[x_,Q2_,energy_]:=Q2/(2*0.938*energy*x);
 CrossSectionUU[pion_,x_,z_,Q2_,PT_,energy_,phi_]:=coupling^2/(x y[x,Q2,energy] Q2) (1-y[x,Q2,energy]+y[x,Q2,energy]^2/2)*(FUU[pion,x,z,Q2,PT]+Cos[phi] p3[y[x,Q2,energy]] FUUcosphi[pion,x,z,Q2,PT]+Cos[2 phi] p1[y[x,Q2,energy]] FUUcos2phi[pion,x,z,Q2,PT])
+ 
+(* Cross Section of unpolarized beam and longitidunally polarized target *)
+CrossSectionUL[pion_,x_,z_,Q2_,PT_,energy_,phi_]:=coupling^2/(x y[x,Q2,energy] Q2) (1-y[x,Q2,energy]+y[x,Q2,energy]^2/2) * (Sin[2 phi] p1[y[x,Q2,energy]] FULsin2phi[pion, x, z, Q2, PT]+Sin[phi] p3[y[x,Q2,energy]] FULsinphi[pion, x, z, Q2, PT])
+                                                                                                                                        
+(* Cross Section of longitidunally polarized beam and unpolarized target *)
+CrossSectionLU[pion_,x_,z_,Q2_,PT_,energy_,phi_,helicity_]:=0.0
+ 
+ 
 
 End[];
 EndPackage[];
