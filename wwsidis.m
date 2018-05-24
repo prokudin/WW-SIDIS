@@ -36,6 +36,7 @@ AUTsin2PhiminusPhiSIntegrated::usage="AUTsin2PhiminusPhiSIntegrated[pion_, x_, z
 CrossSectionUU::usage="CrossSectionUU[pion_,x_,z_,Q2_,PT_,energy_,phi_] calculates the differential cross section of unpolarized beam and target";
 CrossSectionUL::usage="CrossSectionUL[pion_,x_,z_,Q2_,PT_,energy_,phi_] calculates the differential cross section of unpolarized beam and longitidunally polarized target";
 CrossSectionLU::usage="CrossSectionLU[pion_,x_,z_,Q2_,PT_,energy_,phi_,helicity_] calculates the differential cross section of longitidunally polarized beam and unpolarized target";
+CrossSectionLL::usage="CrossSectionLL[pion_,x_,z_,Q2_,PT_,energy_,phi_,helicity_] calculates the differential cross section of longitidunally polarized beam and longitidunally polarized target";
 
 Begin["`Private`"];
 DSShplus= ReadList["./Grids/fragmentationpiplus.dat",Real,RecordLists-> True];
@@ -565,7 +566,8 @@ CrossSectionUL[pion_,x_,z_,Q2_,PT_,energy_,phi_]:=coupling^2/(x y[x,Q2,energy] Q
 (* Cross Section of longitidunally polarized beam and unpolarized target *)
 CrossSectionLU[pion_,x_,z_,Q2_,PT_,energy_,phi_,helicity_]:=0.0
  
- 
+(* Cross Section of longitidunally polarized beam and longitidunally polarized target *)
+CrossSectionLL[pion_,x_,z_,Q2_,PT_,energy_,phi_,helicity_]:=coupling^2/(x y[x,Q2,energy] Q2) (1-y[x,Q2,energy]+y[x,Q2,energy]^2/2) * (helicity p2[y[x,Q2,energy]] FLL[pion, x, z, Q2, PT] + helicity Cos[phi] p4[y[x,Q2,energy]] FLLcosphi[pion, x, z, Q2, PT])
 
 End[];
 EndPackage[];
