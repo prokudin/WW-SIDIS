@@ -1,5 +1,8 @@
 (* ::Package:: *)
 
+ 
+
+
 Print["Package WW-SIDIS contains the set of TMDs calculated with WW approximation and SIDIS structure functions"];
 Print["Copyright: Alexei Prokudin (PSU Berks), Kemal Tezgin (UConn), Version 1 (05/21/2018)"];
 Print["e-mail: prokudin@jlab.org"];
@@ -13,11 +16,11 @@ f1d::usage="f1d[x_,Q2_ ] is the unpolarised collinear PDF for d quark";
 ?f1d;
 h1Lu::usage="h1Lu[x_,Q2_ ] is the unpolarised collinear PDF for u quark";
 h1Ld::usage="f1d[x_,Q2_ ] is the unpolarised collinear PDF for d quark";
-g2::usage="f1u[x_,Q2_ ] is the unpolarised collinear PDF for u quark";
-g2n::usage="f1d[x_,Q2_ ] is the unpolarised collinear PDF for d quark";
+
 g1Tperpu::usage="f1u[x_,Q2_ ] is the unpolarised collinear PDF for u quark";
 g1Tperpd::usage="f1d[x_,Q2_ ] is the unpolarised collinear PDF for d quark";
-ALL::usage="ALL[pion_, x_, z_, Q2_, PT_] is the ... asymmetry";
+ALL::usage="ALL[pion_, x_, z_, Q2_, PT_] is the ALL asymmetry";
+?ALL;
 AUTSivers::usage="AUTSivers[pion_, x_, z_, Q2_, PT_] is the Sivers asymmetry";
 AUTCollins::usage="AUTCollins[pion_, x_, z_, Q2_, PT_] is the Collins asymmetry";
 AUTh1tp::usage="AUTh1tp[pion_, x_, z_, Q2_, PT_] is the Pretzelosity asymmetry";
@@ -33,13 +36,15 @@ AUTsinphiS::usage="AUTsinphiS[pion_, x_, z_, Q2_, PT_] is the ... asymmetry";
 AUTsin2PhiminusPhiS::usage="AUTsin2PhiminusPhiS[pion_, x_, z_, Q2_, PT_] is the ... asymmetry";
 AULsin2phiIntegrated::usage="AULsin2phiIntegrated[pion_, x_, z_, Q2_] is the P_T integrated Kotzinian-Mulders asymmetry";
 AUTsin2PhiminusPhiSIntegrated::usage="AUTsin2PhiminusPhiSIntegrated[pion_, x_, z_, Q2_] is the P_T integrated ... asymmetry";
-CrossSectionUU::usage="CrossSectionUU[pion_,x_,z_,Q2_,PT_,energy_,phi_] calculates the differential cross section of unpolarized beam and target";
+(*CrossSectionUU::usage="CrossSectionUU[pion_,x_,z_,Q2_,PT_,energy_,phi_] calculates the differential cross section of unpolarized beam and target";
 CrossSectionUL::usage="CrossSectionUL[pion_,x_,z_,Q2_,PT_,energy_,phi_] calculates the differential cross section of unpolarized beam and longitidunally polarized target";
 CrossSectionLU::usage="CrossSectionLU[pion_,x_,z_,Q2_,PT_,energy_,phi_,helicity_] calculates the differential cross section of longitidunally polarized beam and unpolarized target";
 CrossSectionLL::usage="CrossSectionLL[pion_,x_,z_,Q2_,PT_,energy_,phi_,helicity_] calculates the differential cross section of longitidunally polarized beam and longitidunally polarized target";
 CrossSectionUT::usage="CrossSectionUT[pion_,x_,z_,Q2_,PT_,energy_,phih_,phiS_,helicity_] calculates the differential cross section of unpolarized beam and transversely polarized target";
 CrossSectionLT::usage="CrossSectionLT[pion_,x_,z_,Q2_,PT_,energy_,phih_,phiS_,helicity_] calculates the differential cross section of longitidunally polarized beam and transversely polarized target";
-CrossSection::usage="CrossSection[pion_,x_,z_,Q2_,PT_,energy_,phih_,phiS_,helicity_,targetpolarization_] calculates the differential cross section of specified ...";
+*)
+CrossSection::usage="CrossSection[pion_,x_,z_,Q2_,PT_,energy_,phih_,phiS_,helicity_,targetpolarization_] calculates the differential cross section of specified pion_,x_,z_,Q2_,PT_,energy_,phih_,phiS_,helicity_,targetpolarization_";
+?CrossSection;
 
 Begin["`Private`"];
 DSShplus= ReadList["./Grids/fragmentationpiplus.dat",Real,RecordLists-> True];
@@ -549,19 +554,19 @@ msg::nnarg="Invalid input.";
 CrossSectionUU[pion_,x_,z_,Q2_,PT_,energy_,phi_]:=coupling^2/(x y[x,Q2,energy] Q2) (1-y[x,Q2,energy]+y[x,Q2,energy]^2/2)* x *(FUU[pion,x,z,Q2,PT]+Cos[phi] p3[y[x,Q2,energy]] FUUcosphi[pion,x,z,Q2,PT]+Cos[2 phi] p1[y[x,Q2,energy]] FUUcos2phi[pion,x,z,Q2,PT])
  
 (* Cross Section of unpolarized beam and longitidunally polarized target *)
-CrossSectionUL[pion_,x_,z_,Q2_,PT_,energy_,phi_]:=coupling^2/(x y[x,Q2,energy] Q2) (1-y[x,Q2,energy]+y[x,Q2,energy]^2/2) * x *(Sin[2 phi] p1[y[x,Q2,energy]] FULsin2phi[pion, x, z, Q2, PT]+Sin[phi] p3[y[x,Q2,energy]] FULsinphi[pion, x, z, Q2, PT])
+CrossSectionUL[pion_,x_,z_,Q2_,PT_,energy_,phi_]:=CrossSectionUU[pion,x,z,Q2,PT,energy,phi]+coupling^2/(x y[x,Q2,energy] Q2) (1-y[x,Q2,energy]+y[x,Q2,energy]^2/2) * x *(Sin[2 phi] p1[y[x,Q2,energy]] FULsin2phi[pion, x, z, Q2, PT]+Sin[phi] p3[y[x,Q2,energy]] FULsinphi[pion, x, z, Q2, PT])
                                                                                                                                         
 (* Cross Section of longitidunally polarized beam and unpolarized target *)
-CrossSectionLU[pion_,x_,z_,Q2_,PT_,energy_,phi_,helicity_]:=0.0
+CrossSectionLU[pion_,x_,z_,Q2_,PT_,energy_,phi_,helicity_]:=CrossSectionUU[pion,x,z,Q2,PT,energy,phi]+0.0
  
 (* Cross Section of longitidunally polarized beam and longitidunally polarized target *)
-CrossSectionLL[pion_,x_,z_,Q2_,PT_,energy_,phi_,helicity_]:=coupling^2/(x y[x,Q2,energy] Q2) (1-y[x,Q2,energy]+y[x,Q2,energy]^2/2) * x *(helicity/2 p2[y[x,Q2,energy]] FLL[pion, x, z, Q2, PT] + helicity/2 Cos[phi] p4[y[x,Q2,energy]] FLLcosphi[pion, x, z, Q2, PT])
+CrossSectionLL[pion_,x_,z_,Q2_,PT_,energy_,phi_,helicity_]:=CrossSectionUU[pion,x,z,Q2,PT,energy,phi]+coupling^2/(x y[x,Q2,energy] Q2) (1-y[x,Q2,energy]+y[x,Q2,energy]^2/2) * x *(helicity/2 p2[y[x,Q2,energy]] FLL[pion, x, z, Q2, PT] + helicity/2 Cos[phi] p4[y[x,Q2,energy]] FLLcosphi[pion, x, z, Q2, PT])
  
 (* Cross Section of unpolarized beam and transversely polarized target *)
-CrossSectionUT[pion_,x_,z_,Q2_,PT_,energy_,phih_,phiS_]:=coupling^2/(x y[x,Q2,energy] Q2) (1-y[x,Q2,energy]+y[x,Q2,energy]^2/2) * x *(Sin[phih - phiS] FUTf1tperp[pion, x, z, Q2, PT] + Sin[phih + phiS] p1[y[x,Q2,energy]] FUTh1[pion, x, z, Q2, PT] + Sin[3*phih - phiS] p1[y[x,Q2,energy]] FUTh1tp[pion, x, z, Q2, PT] + Sin[phiS] p3[y[x,Q2,energy]] FUTsinphiS[pion, x, z, Q2, PT] + Sin[2*phih - phiS] p3[y[x,Q2,energy]] FUTsin2phi[pion, x, z, Q2, PT])
+CrossSectionUT[pion_,x_,z_,Q2_,PT_,energy_,phih_,phiS_]:=CrossSectionUU[pion,x,z,Q2,PT,energy,phih]+coupling^2/(x y[x,Q2,energy] Q2) (1-y[x,Q2,energy]+y[x,Q2,energy]^2/2) * x *(Sin[phih - phiS] FUTf1tperp[pion, x, z, Q2, PT] + Sin[phih + phiS] p1[y[x,Q2,energy]] FUTh1[pion, x, z, Q2, PT] + Sin[3*phih - phiS] p1[y[x,Q2,energy]] FUTh1tp[pion, x, z, Q2, PT] + Sin[phiS] p3[y[x,Q2,energy]] FUTsinphiS[pion, x, z, Q2, PT] + Sin[2*phih - phiS] p3[y[x,Q2,energy]] FUTsin2phi[pion, x, z, Q2, PT])
  
 (* Cross Section of longitudinally polarized beam and transversely polarized target *)
-CrossSectionLT[pion_,x_,z_,Q2_,PT_,energy_,phih_,phiS_,helicity_]:=coupling^2/(x y[x,Q2,energy] Q2) (1-y[x,Q2,energy]+y[x,Q2,energy]^2/2) * x *(helicity/2 Cos[phih - phiS] p2[y[x,Q2,energy]] FLT[pion, x, z, Q2, PT] + helicity/2 Cos[phiS] p4[y[x,Q2,energy]] FLTcosPhi[pion, x, z, Q2, PT] + helicity/2 Cos[2*phih - phiS] p4[y[x,Q2,energy]] FUTsin2phi[pion, x, z, Q2, PT])
+CrossSectionLT[pion_,x_,z_,Q2_,PT_,energy_,phih_,phiS_,helicity_]:=CrossSectionUU[pion,x,z,Q2,PT,energy,phih]+coupling^2/(x y[x,Q2,energy] Q2) (1-y[x,Q2,energy]+y[x,Q2,energy]^2/2) * x *(helicity/2 Cos[phih - phiS] p2[y[x,Q2,energy]] FLT[pion, x, z, Q2, PT] + helicity/2 Cos[phiS] p4[y[x,Q2,energy]] FLTcosPhi[pion, x, z, Q2, PT] + helicity/2 Cos[2*phih - phiS] p4[y[x,Q2,energy]] FUTsin2phi[pion, x, z, Q2, PT])
  
 CrossSection[pion_,x_,z_,Q2_,PT_,energy_,phih_,phiS_,helicity_,targetpolarization_]:=Which[helicity==0 && targetpolarization=="U", CrossSectionUU[pion,x,z,Q2,PT,energy,phih],helicity==0 && targetpolarization=="L", CrossSectionUL[pion,x,z,Q2,PT,energy,phih], (helicity==1 || helicity==-1) && targetpolarization=="U", 0.0, (helicity==1 || helicity==-1) && targetpolarization=="L", CrossSectionLL[pion,x,z,Q2,PT,energy,phih,helicity], helicity==0 && targetpolarization=="T", CrossSectionUT[pion,x,z,Q2,PT,energy,phih,phiS], (helicity==1 || helicity==-1) && targetpolarization=="T", CrossSectionLT[pion,x,z,Q2,PT,energy,phih,phiS,helicity], True, Message[msg::nnarg]]
 
