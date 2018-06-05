@@ -3,6 +3,8 @@ Results of "Semi-Inclusive Deep Inelastic Scattering in Wandzura-Wilczek-type ap
 
 Comments or questions: e-mail:prokudin@jlab.org, kemal.tezgin@uconn.edu
 
+Usage: download or clone the repository and open example.nb using Mathematica
+
 Supported in part by the National 
 Science Foundation under 
 Contract No. PHY-1623454 and No. PHY-1406298 
