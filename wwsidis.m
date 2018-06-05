@@ -4,38 +4,77 @@
 
 
 Print["Package WW-SIDIS contains the set of TMDs calculated with WW approximation and SIDIS structure functions"];
-Print["Copyright: Alexei Prokudin (PSU Berks), Kemal Tezgin (UConn), Version 1 (05/21/2018)"];
-Print["e-mail: prokudin@jlab.org"];
+Print["Copyright: Alexei Prokudin (PSU Berks), Kemal Tezgin (UConn), Version 1.01 (06/05/2018)"];
+Print["e-mail: prokudin@jlab.org, kemal.tezgin@uconn.edu"];
 Print["https://github.com/prokudin/WW-SIDIS"];
+Print[Style["If you use this package, please, site arXiv for this paper and https://github.com/prokudin/WW-SIDIS", Red]];
 Print["___________________________________________________________________________"];
 Print["Contains the following functions: "];
 BeginPackage["wwsidis`"];
-f1u::usage="f1u[x_,Q2_ ] is the unpolarised collinear PDF for u quark";
-f1d::usage="f1d[x_,Q2_ ] is the unpolarised collinear PDF for d quark";
+f1u::usage="f1u[x_,Q2_ ] is the unpolarised collinear PDF for u quark, bibitem{Martin:2009iq}";
+f1d::usage="f1d[x_,Q2_ ] is the unpolarised collinear PDF for d quark, bibitem{Martin:2009iq}";
 ?f1u;
 ?f1d;
-h1Lu::usage="h1Lu[x_,Q2_ ] is the unpolarised collinear PDF for u quark";
-h1Ld::usage="f1d[x_,Q2_ ] is the unpolarised collinear PDF for d quark";
-
-g1Tperpu::usage="f1u[x_,Q2_ ] is the unpolarised collinear PDF for u quark";
-g1Tperpd::usage="f1d[x_,Q2_ ] is the unpolarised collinear PDF for d quark";
-ALL::usage="ALL[pion_, x_, z_, Q2_, PT_] is the ALL asymmetry";
+D1u::usage="D1u[pion_, z_, Q2_ ] is the unpolarised collinear FF for u quark, pion = pi+ or pi-, bibitem{deFlorian:2007aj}";
+D1d::usage="D1d[pion_, z_, Q2_ ] is the unpolarised collinear FF for u quark, pion = pi+ or pi-, bibitem{deFlorian:2007aj}";
+?D1u;
+?D1d;
+g1u::usage="g1u[x_,Q2_ ] is the helicity collinear PDF for u quark, bibitem{Gluck:1998xa}";
+g1d::usage="g1d[x_,Q2_ ] is the helicity collinear PDF for d quark, bibitem{Gluck:1998xa}";
+?g1u;
+?g1d;
+H1perpFavFirstMoment::usage="H1perpFavFirstMoment[x_, Q2_] the first moment of Collins FF favoured, bibitem{Anselmino:2013vqa}";
+H1perpUnfFirstMoment::usage="H1perpUnfFirstMoment[x_, Q2_] the first moment of Collins FF unfavoured, bibitem{Anselmino:2013vqa}";
+?H1perpFavFirstMoment;
+?H1perpUnfFirstMoment;
+f1TperpuFirstMoment::usage="f1TperpuFirstMoment[x_,Q2_] the first moment of Sivers PDF for u quark, bibitem{Anselmino:2011gs}";
+f1TperpdFirstMoment::usage="f1TperpdFirstMoment[x_,Q2_] the first moment of Sivers PDF for d quark, bibitem{Anselmino:2011gs}";
+?f1TperpuFirstMoment;
+?f1TperpdFirstMoment;
+h1TperpuSecondMoment::usage="h1TperpuSecondMoment[x_,Q2_] the second moment of pretzelosity for u quark, bibitem{Lefky:2014eia};"
+h1TperpdSecondMoment::usage="h1TperpdSecondMoment[x_,Q2_] the second moment of pretzelosity for d quark, bibitem{Lefky:2014eia};"
+?h1TperpuSecondMoment;
+?h1TperpdSecondMoment;
+h1perpuFirstMoment::usage="h1perpuFirstMoment[x_,Q2_] the first moment of Boer-Mulders function for u quark, bibitem{Barone:2009hw};"
+h1perpdFirstMoment::usage="h1perpdFirstMoment[x_,Q2_] the first moment of Boer-Mulders function for d quark, bibitem{Barone:2009hw};"
+?h1perpuFirstMoment;
+?h1perpdFirstMoment;
+h1Lu::usage="h1Lu[x_,Q2_ ] is the \!\(\*SubsuperscriptBox[\(h\), \(1  L\), \(\[UpTee]\)]\) PDF for u quark, this work";
+h1Ld::usage="h1Ld[x_,Q2_ ] is the \!\(\*SubsuperscriptBox[\(h\), \(1  L\), \(\[UpTee]\)]\) PDF for u quark, this work";
+?h1Lu;
+?h1Ld;
+g1Tperpu::usage="g1Tperpu[x_,Q2_ ] is the \!\(\*SubsuperscriptBox[\(g\), \(1  T\), \(\[UpTee]\)]\) PDF for u quark, this work";
+g1Tperpd::usage="g1Tperpd[x_,Q2_ ] is the \!\(\*SubsuperscriptBox[\(g\), \(1  T\), \(\[UpTee]\)]\) PDF for d quark, this work";
+?g1Tperpu;
+?g1Tperpd;
+ALL::usage="ALL[pion_, x_, z_, Q2_, PT_] is the \!\(\*SubscriptBox[\(A\), \(LL\)]\) asymmetry";
 ?ALL;
-AUTSivers::usage="AUTSivers[pion_, x_, z_, Q2_, PT_] is the Sivers asymmetry";
-AUTCollins::usage="AUTCollins[pion_, x_, z_, Q2_, PT_] is the Collins asymmetry";
-AUTh1tp::usage="AUTh1tp[pion_, x_, z_, Q2_, PT_] is the Pretzelosity asymmetry";
-AUUcos2phi::usage="AUUcos2phi[pion_, x_, z_, Q2_, PT_] is the Boer-Mulders asymmetry";
-ALT::usage="ALT[pion_, x_, z_, Q2_, PT_] is the Double Spin asymmetry";
-AULsin2phi::usage="AULsin2phi[pion_, x_, z_, Q2_, PT_] is the Kotzinian-Mulders asymmetry";
-ALTcosPhi::usage="ALTcosPhi[pion_, x_, z_, Q2_, PT_] is the ... asymmetry";
-AULsinphi::usage="AULsinphi[pion_, x_, z_, Q2_, PT_] is the ... asymmetry";
-ALLcosphi::usage="ALLcosphi[pion_, x_, z_, Q2_, PT_] is the ... asymmetry";
-ALTcos2PhiminusPhiS::usage="ALTcos2PhiminusPhiS[pion_, x_, z_, Q2_, PT_] is the ... asymmetry";
-AUUcosphi::usage="AUUcosphi[pion_, x_, z_, Q2_, PT_] is the ... asymmetry";
-AUTsinphiS::usage="AUTsinphiS[pion_, x_, z_, Q2_, PT_] is the ... asymmetry";
-AUTsin2PhiminusPhiS::usage="AUTsin2PhiminusPhiS[pion_, x_, z_, Q2_, PT_] is the ... asymmetry";
-AULsin2phiIntegrated::usage="AULsin2phiIntegrated[pion_, x_, z_, Q2_] is the P_T integrated Kotzinian-Mulders asymmetry";
-AUTsin2PhiminusPhiSIntegrated::usage="AUTsin2PhiminusPhiSIntegrated[pion_, x_, z_, Q2_] is the P_T integrated ... asymmetry";
+AUTSivers::usage="AUTSivers[pion_, x_, z_, Q2_, PT_] is the Sivers \!\(\*SubsuperscriptBox[\(A\), \(UT\), \(TraditionalForm\`sin[\*SubscriptBox[\(\[CapitalPhi]\), \(h\)] - \*SubscriptBox[\(\[CapitalPhi]\), \(S\)]]\)]\) asymmetry";
+?AUTSivers;
+AUTCollins::usage="AUTCollins[pion_, x_, z_, Q2_, PT_] is the Collins \!\(\*SubsuperscriptBox[\(A\), \(UT\), \(TraditionalForm\`sin[\*SubscriptBox[\(\[CapitalPhi]\), \(h\)] + \*SubscriptBox[\(\[CapitalPhi]\), \(S\)]]\)]\) asymmetry";
+?AUTCollins;
+AUTh1tp::usage="AUTh1tp[pion_, x_, z_, Q2_, PT_] is the Pretzelosity \!\(\*SubsuperscriptBox[\(A\), \(UT\), \(TraditionalForm\`sin[3\\\ \*SubscriptBox[\(\[CapitalPhi]\), \(h\)] - \*SubscriptBox[\(\[CapitalPhi]\), \(S\)]]\)]\) asymmetry";
+?AUTh1tp;
+AUUcos2phi::usage="AUUcos2phi[pion_, x_, z_, Q2_, PT_] is the Boer-Mulders \!\(\*SubsuperscriptBox[\(A\), \(UU\), \(TraditionalForm\`cos[2 \*SubscriptBox[\(\[CapitalPhi]\), \(h\)]]\)]\) asymmetry";
+?AUUcos2phi;
+ALT::usage="ALT[pion_, x_, z_, Q2_, PT_] is the Double Spin \!\(\*SubsuperscriptBox[\(A\), \(LT\), \(TraditionalForm\`cos[\*SubscriptBox[\(\[CapitalPhi]\), \(h\)] - \*SubscriptBox[\(\[CapitalPhi]\), \(S\)]]\)]\) asymmetry";
+?ALT;
+AULsin2phi::usage="AULsin2phi[pion_, x_, z_, Q2_, PT_] is the Kotzinian-Mulders \!\(\*SubsuperscriptBox[\(A\), \(UL\), \(TraditionalForm\`sin[2 \*SubscriptBox[\(\[CapitalPhi]\), \(h\)]]\)]\) asymmetry";
+?AULsin2phi;
+ALTcosPhi::usage="ALTcosPhi[pion_, x_, z_, Q2_, PT_] is the \!\(\*SubsuperscriptBox[\(A\), \(LT\), \(TraditionalForm\`cos[\*SubscriptBox[\(\[CapitalPhi]\), \(S\)]]\)]\) asymmetry";
+?ALTcosPhi;
+AULsinphi::usage="AULsinphi[pion_, x_, z_, Q2_, PT_] is the \!\(\*SubsuperscriptBox[\(A\), \(UL\), \(TraditionalForm\`sin[\*SubscriptBox[\(\[CapitalPhi]\), \(h\)]]\)]\) asymmetry";
+?AULsinphi;
+ALLcosphi::usage="ALLcosphi[pion_, x_, z_, Q2_, PT_] is the \!\(\*SubsuperscriptBox[\(A\), \(LL\), \(TraditionalForm\`cos[\*SubscriptBox[\(\[CapitalPhi]\), \(h\)]]\)]\) asymmetry";
+?ALLcosphi;
+ALTcos2PhiminusPhiS::usage="ALTcos2PhiminusPhiS[pion_, x_, z_, Q2_, PT_] is the \!\(\*SubsuperscriptBox[\(A\), \(LT\), \(TraditionalForm\`cos[2 \*SubscriptBox[\(\[CapitalPhi]\), \(h\)] - \*SubscriptBox[\(\[CapitalPhi]\), \(S\)]]\)]\) asymmetry";
+?ALTcos2PhiminusPhiS;
+AUUcosphi::usage="AUUcosphi[pion_, x_, z_, Q2_, PT_] is the \!\(\*SubsuperscriptBox[\(A\), \(UU\), \(TraditionalForm\`cos[\*SubscriptBox[\(\[CapitalPhi]\), \(h\)]]\)]\) asymmetry";
+?AUUcosphi;
+AUTsinphiS::usage="AUTsinphiS[pion_, x_, z_, Q2_, PT_] is the \!\(\*SubsuperscriptBox[\(A\), \(UT\), \(TraditionalForm\`sin[\*SubscriptBox[\(\[CapitalPhi]\), \(S\)]]\)]\) asymmetry";
+?AUTsinphiS;
+AUTsin2PhiminusPhiS::usage="AUTsin2PhiminusPhiS[pion_, x_, z_, Q2_, PT_] is the \!\(\*SubsuperscriptBox[\(A\), \(UT\), \(TraditionalForm\`sin[2 \*SubscriptBox[\(\[CapitalPhi]\), \(h\)] - \*SubscriptBox[\(\[CapitalPhi]\), \(S\)]]\)]\) asymmetry";
+?AUTsin2PhiminusPhiS;
 (*CrossSectionUU::usage="CrossSectionUU[pion_,x_,z_,Q2_,PT_,energy_,phi_] calculates the differential cross section of unpolarized beam and target";
 CrossSectionUL::usage="CrossSectionUL[pion_,x_,z_,Q2_,PT_,energy_,phi_] calculates the differential cross section of unpolarized beam and longitidunally polarized target";
 CrossSectionLU::usage="CrossSectionLU[pion_,x_,z_,Q2_,PT_,energy_,phi_,helicity_] calculates the differential cross section of longitidunally polarized beam and unpolarized target";
@@ -43,7 +82,7 @@ CrossSectionLL::usage="CrossSectionLL[pion_,x_,z_,Q2_,PT_,energy_,phi_,helicity_
 CrossSectionUT::usage="CrossSectionUT[pion_,x_,z_,Q2_,PT_,energy_,phih_,phiS_,helicity_] calculates the differential cross section of unpolarized beam and transversely polarized target";
 CrossSectionLT::usage="CrossSectionLT[pion_,x_,z_,Q2_,PT_,energy_,phih_,phiS_,helicity_] calculates the differential cross section of longitidunally polarized beam and transversely polarized target";
 *)
-CrossSection::usage="CrossSection[pion_,x_,z_,Q2_,PT_,energy_,phih_,phiS_,helicity_,targetpolarization_] calculates the differential cross section of specified pion_,x_,z_,Q2_,PT_,energy_,phih_,phiS_,helicity_,targetpolarization_";
+CrossSection::usage="Semi-Inclusive Deep Inelastic Cross Section, CrossSection[pion_,x_,z_,Q2_,PT_,energy_,phih_,phiS_,helicity_,targetpolarization_] calculates the differential cross section of specified pion_,x_,z_,Q2_,PT_,energy_,phih_,phiS_,helicity_,targetpolarization_";
 ?CrossSection;
 
 Begin["`Private`"];
@@ -324,6 +363,7 @@ FLL[pion_, x_, z_, Q2_, PT_] := ((4.0/9.0) g1u[x, Q2] D1u[pion, z, Q2] + (1.0/9.
 
 
 FLLIntegrated[pion_, x_, z_, Q2_] := ((4.0/9.0) g1u[x, Q2] D1u[pion, z, Q2] + (1.0/9.0) g1d[x, Q2] D1d[pion, z, Q2] + (1.0/9.0) g1s[x, Q2] D1s[pion, z, Q2]  + (4.0/9.0) g1ubar[x, Q2] D1ubar[pion, z, Q2] + (1.0/9.0) g1dbar[x, Q2] D1dbar[pion, z, Q2] + (1.0/9.0) g1sbar[x, Q2] D1sbar[pion, z, Q2])
+ALL[pion_,x_,z_,Q2_,PT_] := FLL[pion,x,z,Q2,PT]/FUU[pion,x,z,Q2,PT]  ;
 
 (*F_{UT}^{Sin\phi_h-Sin\phi_S}*)
 avUTPTf1tperp[z_] := avp + avks z^2;
