@@ -13,24 +13,56 @@ Print["Contains the following functions: "];
 BeginPackage["wwsidis`"];
 f1u::usage="f1u[x_,Q2_ ] is the unpolarised collinear PDF for u quark, bibitem{Martin:2009iq}";
 f1d::usage="f1d[x_,Q2_ ] is the unpolarised collinear PDF for d quark, bibitem{Martin:2009iq}";
+f1ubar::usage="f1ubar[x_,Q2_ ] is the unpolarised collinear PDF for ubar quark, bibitem{Martin:2009iq}";
+f1dbar::usage="f1dbar[x_,Q2_ ] is the unpolarised collinear PDF for dbar quark, bibitem{Martin:2009iq}";
+f1s::usage="f1s[x_,Q2_ ] is the unpolarised collinear PDF for s quark, bibitem{Martin:2009iq}";
+f1sbar::usage="f1sbar[x_,Q2_ ] is the unpolarised collinear PDF for sbar quark, bibitem{Martin:2009iq}";
 ?f1u;
 ?f1d;
+?f1ubar;
+?f1dbar;
+?f1s;
+?f1sbar;
 D1u::usage="D1u[pion_, z_, Q2_ ] is the unpolarised collinear FF for u quark, pion = pi+ or pi-, bibitem{deFlorian:2007aj}";
-D1d::usage="D1d[pion_, z_, Q2_ ] is the unpolarised collinear FF for u quark, pion = pi+ or pi-, bibitem{deFlorian:2007aj}";
+D1d::usage="D1d[pion_, z_, Q2_ ] is the unpolarised collinear FF for dbar quark, pion = pi+ or pi-, bibitem{deFlorian:2007aj}";
+D1ubar::usage="D1ubar[pion_, z_, Q2_ ] is the unpolarised collinear FF for ubar quark, pion = pi+ or pi-, bibitem{deFlorian:2007aj}";
+D1dbar::usage="D1dbar[pion_, z_, Q2_ ] is the unpolarised collinear FF for dbar quark, pion = pi+ or pi-, bibitem{deFlorian:2007aj}";
+D1s::usage="D1s[pion_, z_, Q2_ ] is the unpolarised collinear FF for s quark, pion = pi+ or pi-, bibitem{deFlorian:2007aj}";
+D1sbar::usage="D1sbar[pion_, z_, Q2_ ] is the unpolarised collinear FF for sbar quark, pion = pi+ or pi-, bibitem{deFlorian:2007aj}";
 ?D1u;
 ?D1d;
+?D1ubar;
+?D1dbar;
+?D1s;
+?D1sbar;
 g1u::usage="g1u[x_,Q2_ ] is the helicity collinear PDF for u quark, bibitem{Gluck:1998xa}";
 g1d::usage="g1d[x_,Q2_ ] is the helicity collinear PDF for d quark, bibitem{Gluck:1998xa}";
+g1ubar::usage="g1ubar[x_,Q2_ ] is the helicity collinear PDF for ubar quark, bibitem{Gluck:1998xa}";
+g1dbar::usage="g1dbar[x_,Q2_ ] is the helicity collinear PDF for dbar quark, bibitem{Gluck:1998xa}";
+g1s::usage="g1s[x_,Q2_ ] is the helicity collinear PDF for s quark, bibitem{Gluck:1998xa}";
+g1sbar::usage="g1sbar[x_,Q2_ ] is the helicity collinear PDF for sbar quark, bibitem{Gluck:1998xa}";
 ?g1u;
 ?g1d;
+?g1ubar;
+?g1dbar;
+?g1s;
+?g1sbar;
 H1perpFavFirstMoment::usage="H1perpFavFirstMoment[x_, Q2_] the first moment of Collins FF favoured, bibitem{Anselmino:2013vqa}";
 H1perpUnfFirstMoment::usage="H1perpUnfFirstMoment[x_, Q2_] the first moment of Collins FF unfavoured, bibitem{Anselmino:2013vqa}";
 ?H1perpFavFirstMoment;
 ?H1perpUnfFirstMoment;
-f1TperpuFirstMoment::usage="f1TperpuFirstMoment[x_,Q2_] the first moment of Sivers PDF for u quark, bibitem{Anselmino:2011gs}";
-f1TperpdFirstMoment::usage="f1TperpdFirstMoment[x_,Q2_] the first moment of Sivers PDF for d quark, bibitem{Anselmino:2011gs}";
+f1TperpuFirstMoment::usage="f1TperpuFirstMoment[x_,Q2_] the first moment of \!\(\*SubsuperscriptBox[\(f\), \(1  T\), \(\[UpTee]\)]\) Sivers PDF for u quark, bibitem{Anselmino:2011gs}";
+f1TperpdFirstMoment::usage="f1TperpdFirstMoment[x_,Q2_] the first moment of \!\(\*SubsuperscriptBox[\(f\), \(1  T\), \(\[UpTee]\)]\) Sivers PDF for d quark, bibitem{Anselmino:2011gs}";
+f1TperpubarFirstMoment::usage="f1TperpubarFirstMoment[x_,Q2_] the first moment of \!\(\*SubsuperscriptBox[\(f\), \(1  T\), \(\[UpTee]\)]\) Sivers PDF for ubar quark, bibitem{Anselmino:2011gs}";
+f1TperpdbarFirstMoment::usage="f1TperpdbarFirstMoment[x_,Q2_] the first moment of \!\(\*SubsuperscriptBox[\(f\), \(1  T\), \(\[UpTee]\)]\) Sivers PDF for dbar quark, bibitem{Anselmino:2011gs}";
+f1TperpsFirstMoment::usage="f1TperpsFirstMoment[x_,Q2_] the first moment of \!\(\*SubsuperscriptBox[\(f\), \(1  T\), \(\[UpTee]\)]\) Sivers PDF for s quark, bibitem{Anselmino:2011gs}";
+f1TperpsbarFirstMoment::usage="f1TperpsbarFirstMoment[x_,Q2_] the first moment of \!\(\*SubsuperscriptBox[\(f\), \(1  T\), \(\[UpTee]\)]\) Sivers PDF for sbar quark, bibitem{Anselmino:2011gs}";
 ?f1TperpuFirstMoment;
 ?f1TperpdFirstMoment;
+?f1TperpubarFirstMoment;
+?f1TperpdbarFirstMoment;
+?f1TperpsFirstMoment;
+?f1TperpsbarFirstMoment;
 h1TperpuSecondMoment::usage="h1TperpuSecondMoment[x_,Q2_] the second moment of pretzelosity for u quark, bibitem{Lefky:2014eia};"
 h1TperpdSecondMoment::usage="h1TperpdSecondMoment[x_,Q2_] the second moment of pretzelosity for d quark, bibitem{Lefky:2014eia};"
 ?h1TperpuSecondMoment;
@@ -84,7 +116,15 @@ CrossSectionLT::usage="CrossSectionLT[pion_,x_,z_,Q2_,PT_,energy_,phih_,phiS_,he
 *)
 CrossSection::usage="Semi-Inclusive Deep Inelastic Cross Section, CrossSection[pion_,x_,z_,Q2_,PT_,energy_,phih_,phiS_,helicity_,targetpolarization_] calculates the differential cross section of specified pion_,x_,z_,Q2_,PT_,energy_,phih_,phiS_,helicity_,targetpolarization_";
 ?CrossSection;
-
+Print["Contains the following constants: "];
+avp::usage="avp unpolarized \!\(\*SubscriptBox[\(D\), \(1\)]\) TMD fragmentation distribution width";
+?avp;
+avk::usage="avk unpolarized \!\(\*SubscriptBox[\(f\), \(1\)]\) TMD  width";
+?avk;
+avkg::usage="avkg helicity \!\(\*SubscriptBox[\(g\), \(1\)]\)TMD width";
+?avkg;
+avks::usage="avks \!\(\*SubsuperscriptBox[\(f\), \(1  T\), \(\[UpTee]\)]\) (Sivers function) TMD width";
+?avks;
 Begin["`Private`"];
 DSShplus= ReadList["./Grids/fragmentationpiplus.dat",Real,RecordLists-> True];
 DSShminus= ReadList["./Grids/fragmentationpiminus.dat",Real,RecordLists-> True];
@@ -135,7 +175,7 @@ f1d[x_,Q2_ ]:= dn[x,Q2] ;
 f1ubar[x_,Q2_ ]:= upbar[x,Q2];  
 f1dbar[x_,Q2_ ]:= dnbar[x,Q2] ; 
 f1s[x_,Q2_ ]:= str[x,Q2];
-f1sdbar[x_,Q2_ ]:= sbar[x,Q2];
+f1sbar[x_,Q2_ ]:= sbar[x,Q2];
 
 
 f1uTMD[x_,Q2_ ,kt_]:= up[x,Q2]1/(\[Pi] avk) Exp[-kt^2/avk];
@@ -143,7 +183,7 @@ f1dTMD[x_,Q2_,kt_ ]:= dn[x,Q2] 1/(\[Pi] avk) Exp[-kt^2/avk];
 f1ubarTMD[x_,Q2_,kt_ ]:= upbar[x,Q2]  1/(\[Pi] avk) Exp[-kt^2/avk];
 f1dbarTMD[x_,Q2_ ,kt_]:= dnbar[x,Q2]  1/(\[Pi] avk) Exp[-kt^2/avk];
 f1sTMD[x_,Q2_,kt_ ]:= str[x,Q2]1/(\[Pi] avk) Exp[-kt^2/avk];
-f1sdbarTMD[x_,Q2_,kt_ ]:= sbar[x,Q2]1/(\[Pi] avk) Exp[-kt^2/avk];
+f1sbarTMD[x_,Q2_,kt_ ]:= sbar[x,Q2]1/(\[Pi] avk) Exp[-kt^2/avk];
 
 (*2005 fit Appendix A.1 [hep-ph/0501196]*)
 Clear[avp];
@@ -239,7 +279,7 @@ f1TperpdFirstMoment[x_,Q2_]:=-Sqrt[ E/2] 1/(Mp Ms) dsiv[x,Q2] avks^2/avk;
 f1TperpubarFirstMoment[x_,Q2_]:=-Sqrt[ E/2] 1/(Mp Ms) ubarsiv[x,Q2] avks^2/avk ;
 f1TperpdbarFirstMoment[x_,Q2_]:=-Sqrt[ E/2] 1/(Mp Ms) dbarsiv[x,Q2] avks^2/avk;
 f1TperpsFirstMoment[x_,Q2_]:=-Sqrt[ E/2] 1/(Mp Ms) ssiv[x,Q2] avks^2/avk ;
-f1TperpsbFirstMoment[x_,Q2_]:=-Sqrt[ E/2] 1/(Mp Ms) sbarsiv[x,Q2] avks^2/avk;
+f1TperpsbarFirstMoment[x_,Q2_]:=-Sqrt[ E/2] 1/(Mp Ms) sbarsiv[x,Q2] avks^2/avk;
 
 
 f1TperpuTMD[x_,Q2_,kt_]:=-(Mp/Ms) Sqrt[2 E]usiv[x,Q2]1/(\[Pi] avk) Exp[-kt^2/avks];
@@ -247,7 +287,7 @@ f1TperpdTMD[x_,Q2_,kt_]:=-(Mp/Ms) Sqrt[2 E]dsiv[x,Q2]1/(\[Pi] avk) Exp[-kt^2/avk
 f1TperpubarTMD[x_,Q2_,kt_]:=-(Mp/Ms) Sqrt[2 E]ubarsiv[x,Q2]1/(\[Pi] avk) Exp[-kt^2/avks];
 f1TperpdbarTMD[x_,Q2_,kt_]:=-(Mp/Ms) Sqrt[2 E]dbarsiv[x,Q2]1/(\[Pi] avk) Exp[-kt^2/avks];
 f1TperpsTMD[x_,Q2_,kt_]:=-(Mp/Ms) Sqrt[2 E]ssiv[x,Q2]1/(\[Pi] avk) Exp[-kt^2/avks];
-f1TperpsbTMD[x_,Q2_,kt_]:=-(Mp/Ms) Sqrt[2 E]sbarsiv[x,Q2]1/(\[Pi] avk) Exp[-kt^2/avks];
+f1TperpsbarTMD[x_,Q2_,kt_]:=-(Mp/Ms) Sqrt[2 E]sbarsiv[x,Q2]1/(\[Pi] avk) Exp[-kt^2/avks];
 
 
 
@@ -351,9 +391,9 @@ g1Tperpsbar[x_,Q2_] := x NIntegrate[g1sbar[y,Q2]/y,{y,x,1.}];
 (*F_{UU}*)
 avPT[z_] := avp + avk z^2;
 
-FUU[pion_, x_, z_, Q2_, PT_] := ((4.0/9.0) f1u[x, Q2] D1u[pion, z, Q2] + (1.0/9.0) f1d[x,Q2] D1d[pion, z, Q2] + (1.0/9.0) f1s[x, Q2] D1s[pion, z, Q2]  + (4.0/9.0) f1ubar[x, Q2] D1ubar[pion, z, Q2] + (1.0/9.0) f1dbar[x, Q2] D1dbar[pion, z, Q2] + (1.0/9.0) f1sdbar[x, Q2] D1sbar[pion, z, Q2]) Exp[(-PT^2/avPT[z])]/(\[Pi] avPT[z])
+FUU[pion_, x_, z_, Q2_, PT_] := ((4.0/9.0) f1u[x, Q2] D1u[pion, z, Q2] + (1.0/9.0) f1d[x,Q2] D1d[pion, z, Q2] + (1.0/9.0) f1s[x, Q2] D1s[pion, z, Q2]  + (4.0/9.0) f1ubar[x, Q2] D1ubar[pion, z, Q2] + (1.0/9.0) f1dbar[x, Q2] D1dbar[pion, z, Q2] + (1.0/9.0) f1sbar[x, Q2] D1sbar[pion, z, Q2]) Exp[(-PT^2/avPT[z])]/(\[Pi] avPT[z])
 
-FUUIntegrated[pion_, x_, z_, Q2_] := ((4.0/9.0) f1u[x, Q2] D1u[pion, z, Q2] + (1.0/9.0) f1d[x,Q2] D1d[pion, z, Q2] + (1.0/9.0) f1s[x, Q2] D1s[pion, z, Q2]  + (4.0/9.0) f1ubar[x, Q2] D1ubar[pion, z, Q2] + (1.0/9.0) f1dbar[x, Q2] D1dbar[pion, z, Q2] + (1.0/9.0) f1sdbar[x, Q2] D1sbar[pion, z, Q2])
+FUUIntegrated[pion_, x_, z_, Q2_] := ((4.0/9.0) f1u[x, Q2] D1u[pion, z, Q2] + (1.0/9.0) f1d[x,Q2] D1d[pion, z, Q2] + (1.0/9.0) f1s[x, Q2] D1s[pion, z, Q2]  + (4.0/9.0) f1ubar[x, Q2] D1ubar[pion, z, Q2] + (1.0/9.0) f1dbar[x, Q2] D1dbar[pion, z, Q2] + (1.0/9.0) f1sbar[x, Q2] D1sbar[pion, z, Q2])
  
 (*F_{LL}*)
 avLLPT[z_] := avp + avkg z^2;
@@ -371,10 +411,10 @@ avUTPTf1tperp[z_] := avp + avks z^2;
 GUTf1tperp[z_, PT_] := -(Mp^2/(\[Pi] avUTPTf1tperp[z]^2)) Exp[(-PT^2/avUTPTf1tperp[z])]
 AUTf1tperp[z_] := -(( Mp z Sqrt[\[Pi]])/ Sqrt[avUTPTf1tperp[z]])
 
-FUTf1tperp[pion_, x_, z_, Q2_, PT_] := (2 z PT)/Mp ((4.0/9.0) f1TperpuFirstMoment[x, Q2] D1u[pion, z, Q2] + (1.0/9.0) f1TperpdFirstMoment[x, Q2] D1d[pion, z, Q2] + (1.0/9.0) f1TperpsFirstMoment[x, Q2] D1s[pion, z, Q2]  + (4.0/9.0) f1TperpubarFirstMoment[x, Q2] D1ubar[pion, z, Q2] + (1.0/9.0) f1TperpdbarFirstMoment[x, Q2] D1dbar[pion, z, Q2] + (1.0/9.0) f1TperpsbFirstMoment[x, Q2] D1sbar[pion, z, Q2] ) GUTf1tperp[z, PT]
+FUTf1tperp[pion_, x_, z_, Q2_, PT_] := (2 z PT)/Mp ((4.0/9.0) f1TperpuFirstMoment[x, Q2] D1u[pion, z, Q2] + (1.0/9.0) f1TperpdFirstMoment[x, Q2] D1d[pion, z, Q2] + (1.0/9.0) f1TperpsFirstMoment[x, Q2] D1s[pion, z, Q2]  + (4.0/9.0) f1TperpubarFirstMoment[x, Q2] D1ubar[pion, z, Q2] + (1.0/9.0) f1TperpdbarFirstMoment[x, Q2] D1dbar[pion, z, Q2] + (1.0/9.0) f1TperpsbarFirstMoment[x, Q2] D1sbar[pion, z, Q2] ) GUTf1tperp[z, PT]
 
 
-FUTf1tperpIntegrated[pion_, x_, z_, Q2_] := ((4.0/9.0) f1TperpuFirstMoment[x, Q2] D1u[pion, z, Q2] + (1.0/9.0) f1TperpdFirstMoment[x, Q2] D1d[pion, z, Q2] + (1.0/9.0) f1TperpsFirstMoment[x, Q2] D1s[pion, z, Q2]  + (4.0/9.0) f1TperpubarFirstMoment[x, Q2] D1ubar[pion, z, Q2] + (1.0/9.0) f1TperpdbarFirstMoment[x, Q2] D1dbar[pion, z, Q2] + (1.0/9.0) f1TperpsbFirstMoment[x, Q2] D1sbar[pion, z, Q2] ) AUTf1tperp[z]
+FUTf1tperpIntegrated[pion_, x_, z_, Q2_] := ((4.0/9.0) f1TperpuFirstMoment[x, Q2] D1u[pion, z, Q2] + (1.0/9.0) f1TperpdFirstMoment[x, Q2] D1d[pion, z, Q2] + (1.0/9.0) f1TperpsFirstMoment[x, Q2] D1s[pion, z, Q2]  + (4.0/9.0) f1TperpubarFirstMoment[x, Q2] D1ubar[pion, z, Q2] + (1.0/9.0) f1TperpdbarFirstMoment[x, Q2] D1dbar[pion, z, Q2] + (1.0/9.0) f1TperpsbarFirstMoment[x, Q2] D1sbar[pion, z, Q2] ) AUTf1tperp[z]
 
 AUTSivers[pion_, x_, z_, Q2_, PT_] := FUTf1tperp[pion, x, z, Q2, PT]/FUU[pion, x, z, Q2, PT];
 
@@ -572,10 +612,10 @@ avUTsin2phi2PT[z_] := avc + avkP z^2;
 GfactorUTsin2phi2[z_, PT_] := 1/(\[Pi] avUTsin2phi2PT[z]) Exp[(-PT^2/avUTsin2phi2PT[z])]
 AfactorUTsin2phi2[z_] := (4 Mh Mp z^2)/ avUTsin2phi1PT[z] ;
 
-FUTsin2phi[pion_, x_, z_, Q2_, PT_] := ((2 Mp)/Sqrt[Q2]) (z^2 PT^2)/avUTsin2phi1PT[z]^2 avks/Mp^2 ((4.0/9.0) f1TperpuFirstMoment[x, Q2] D1u[pion, z, Q2] + (1.0/9.0) f1TperpdFirstMoment[x, Q2] D1d[pion, z, Q2] + (1.0/9.0) f1TperpsFirstMoment[x, Q2] D1s[pion, z, Q2]  + (4.0/9.0) f1TperpubarFirstMoment[x, Q2] D1ubar[pion, z, Q2] + (1.0/9.0) f1TperpdbarFirstMoment[x, Q2] D1dbar[pion, z, Q2] + (1.0/9.0) f1TperpsbFirstMoment[x, Q2] D1sbar[pion, z, Q2] ) GfactorUTsin2phi1[z, PT] + ((2 Mp)/Sqrt[Q2]) (z^2 PT^2 4 Mp Mh)/avUTsin2phi2PT[z]^2 (-1) ((4.0/9.0) h1TperpuSecondMoment[x, Q2] H1perpFirstMoment["u", pion, z, Q2] + (1.0/9.0) h1TperpdSecondMoment[x, Q2] H1perpFirstMoment["d", pion, z, Q2]) GfactorUTsin2phi2[z, PT]
+FUTsin2phi[pion_, x_, z_, Q2_, PT_] := ((2 Mp)/Sqrt[Q2]) (z^2 PT^2)/avUTsin2phi1PT[z]^2 avks/Mp^2 ((4.0/9.0) f1TperpuFirstMoment[x, Q2] D1u[pion, z, Q2] + (1.0/9.0) f1TperpdFirstMoment[x, Q2] D1d[pion, z, Q2] + (1.0/9.0) f1TperpsFirstMoment[x, Q2] D1s[pion, z, Q2]  + (4.0/9.0) f1TperpubarFirstMoment[x, Q2] D1ubar[pion, z, Q2] + (1.0/9.0) f1TperpdbarFirstMoment[x, Q2] D1dbar[pion, z, Q2] + (1.0/9.0) f1TperpsbarFirstMoment[x, Q2] D1sbar[pion, z, Q2] ) GfactorUTsin2phi1[z, PT] + ((2 Mp)/Sqrt[Q2]) (z^2 PT^2 4 Mp Mh)/avUTsin2phi2PT[z]^2 (-1) ((4.0/9.0) h1TperpuSecondMoment[x, Q2] H1perpFirstMoment["u", pion, z, Q2] + (1.0/9.0) h1TperpdSecondMoment[x, Q2] H1perpFirstMoment["d", pion, z, Q2]) GfactorUTsin2phi2[z, PT]
 
 
-FUTsin2phiIntegrated[pion_, x_, z_, Q2_] := ((2 Mp)/Sqrt[Q2]) avks/Mp^2 ((4.0/9.0) f1TperpuFirstMoment[x, Q2] D1u[pion, z, Q2] + (1.0/9.0) f1TperpdFirstMoment[x, Q2] D1d[pion, z, Q2] + (1.0/9.0) f1TperpsFirstMoment[x, Q2] D1s[pion, z, Q2]  + (4.0/9.0) f1TperpubarFirstMoment[x, Q2] D1ubar[pion, z, Q2] + (1.0/9.0) f1TperpdbarFirstMoment[x, Q2] D1dbar[pion, z, Q2] + (1.0/9.0) f1TperpsbFirstMoment[x, Q2] D1sbar[pion, z, Q2] ) AfactorUTsin2phi1[z] + ((2 Mp)/Sqrt[Q2]) (-1) ((4.0/9.0) h1TperpuSecondMoment[x, Q2] H1perpFirstMoment["u", pion, z, Q2] + (1.0/9.0) h1TperpdSecondMoment[x, Q2] H1perpFirstMoment["d", pion, z, Q2]) AfactorUTsin2phi2[z]
+FUTsin2phiIntegrated[pion_, x_, z_, Q2_] := ((2 Mp)/Sqrt[Q2]) avks/Mp^2 ((4.0/9.0) f1TperpuFirstMoment[x, Q2] D1u[pion, z, Q2] + (1.0/9.0) f1TperpdFirstMoment[x, Q2] D1d[pion, z, Q2] + (1.0/9.0) f1TperpsFirstMoment[x, Q2] D1s[pion, z, Q2]  + (4.0/9.0) f1TperpubarFirstMoment[x, Q2] D1ubar[pion, z, Q2] + (1.0/9.0) f1TperpdbarFirstMoment[x, Q2] D1dbar[pion, z, Q2] + (1.0/9.0) f1TperpsbarFirstMoment[x, Q2] D1sbar[pion, z, Q2] ) AfactorUTsin2phi1[z] + ((2 Mp)/Sqrt[Q2]) (-1) ((4.0/9.0) h1TperpuSecondMoment[x, Q2] H1perpFirstMoment["u", pion, z, Q2] + (1.0/9.0) h1TperpdSecondMoment[x, Q2] H1perpFirstMoment["d", pion, z, Q2]) AfactorUTsin2phi2[z]
 
 AUTsin2PhiminusPhiS[pion_, x_, z_, Q2_, PT_] := FUTsin2phi[pion, x, z, Q2, PT]/FUU[pion, x, z, Q2, PT];
 
