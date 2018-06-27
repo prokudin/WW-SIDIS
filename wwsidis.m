@@ -47,10 +47,21 @@ g1sbar::usage="g1sbar[x_,Q2_ ] is the helicity collinear PDF for sbar quark, bib
 ?g1dbar;
 ?g1s;
 ?g1sbar;
-H1perpFavFirstMoment::usage="H1perpFavFirstMoment[x_, Q2_] the first moment of Collins FF favoured, bibitem{Anselmino:2013vqa}";
-H1perpUnfFirstMoment::usage="H1perpUnfFirstMoment[x_, Q2_] the first moment of Collins FF unfavoured, bibitem{Anselmino:2013vqa}";
-?H1perpFavFirstMoment;
-?H1perpUnfFirstMoment;
+h1u::usage="h1u[x_,Q2_ ] is the transversity collinear PDF for u quark, bibitem{Anselmino:2013vqa}";
+h1d::usage="h1d[x_,Q2_ ] is the transversity collinear PDF for d quark, bibitem{Anselmino:2013vqa}";
+h1ubar::usage="h1ubar[x_,Q2_ ] is the transversity collinear PDF for ubar quark, bibitem{Anselmino:2013vqa}";
+h1dbar::usage="h1dbar[x_,Q2_ ] is the transversity collinear PDF for dbar quark, bibitem{Anselmino:2013vqa}";
+h1s::usage="h1s[x_,Q2_ ] is the transversity collinear PDF for s quark, bibitem{Anselmino:2013vqa}";
+h1sbar::usage="h1sbar[x_,Q2_ ] is the transversity collinear PDF for sbar quark, bibitem{Anselmino:2013vqa}";
+?h1u;
+?h1d;
+?h1ubar;
+?h1dbar;
+?h1s;
+?h1sbar;
+H1perpFirstMoment::usage="H1perpFirstMoment[quark_, pion_, x_, Q2_] the first moment of Collins FF favoured, bibitem{Anselmino:2013vqa}";
+?H1perpFirstMoment;
+
 f1TperpuFirstMoment::usage="f1TperpuFirstMoment[x_,Q2_] the first moment of \!\(\*SubsuperscriptBox[\(f\), \(1  T\), \(\[UpTee]\)]\) Sivers PDF for u quark, bibitem{Anselmino:2011gs}";
 f1TperpdFirstMoment::usage="f1TperpdFirstMoment[x_,Q2_] the first moment of \!\(\*SubsuperscriptBox[\(f\), \(1  T\), \(\[UpTee]\)]\) Sivers PDF for d quark, bibitem{Anselmino:2011gs}";
 f1TperpubarFirstMoment::usage="f1TperpubarFirstMoment[x_,Q2_] the first moment of \!\(\*SubsuperscriptBox[\(f\), \(1  T\), \(\[UpTee]\)]\) Sivers PDF for ubar quark, bibitem{Anselmino:2011gs}";
@@ -125,6 +136,8 @@ avkg::usage="avkg helicity \!\(\*SubscriptBox[\(g\), \(1\)]\)TMD width";
 ?avkg;
 avks::usage="avks \!\(\*SubsuperscriptBox[\(f\), \(1  T\), \(\[UpTee]\)]\) (Sivers function) TMD width";
 ?avks;
+avkh::usage="avkh \!\(\*SubsuperscriptBox[\(H\), \(1\), \(\[UpTee]\)]\) (Collins fragmentation function) TMD width";
+?avkh;
 Begin["`Private`"];
 DSShplus= ReadList["./Grids/fragmentationpiplus.dat",Real,RecordLists-> True];
 DSShminus= ReadList["./Grids/fragmentationpiminus.dat",Real,RecordLists-> True];
@@ -226,6 +239,10 @@ betaT=3.64;
 
 h1u[x_, Q2_] := (NuT x^alphaT (1 - x)^betaT (alphaT + betaT)^(alphaT + betaT)/((alphaT^alphaT) (betaT^betaT))) sb1u[x, Q2];
 h1d[x_, Q2_] := (NdT x^alphaT (1 - x)^betaT (alphaT + betaT)^(alphaT + betaT)/((alphaT^alphaT) (betaT^betaT))) sb1d[x, Q2];
+h1ubar[x_, Q2_] := 0.;
+h1dbar[x_, Q2_] := 0.;
+h1s[x_, Q2_] := 0.;
+h1sbar[x_, Q2_] := 0.;
 
 h1uTMD[x_, Q2_, kt_] := h1u[x, Q2] 1/(\[Pi] avk) Exp[-kt^2/avk];
 h1dTMD[x_, Q2_, kt_] := h1d[x, Q2] 1/(\[Pi] avk) Exp[-kt^2/avk];
@@ -238,6 +255,8 @@ NCunf=-1.000;
 alphaC=1.06;
 betaC=0.07;
 Mh = 0.135;
+
+avkh = avp MC^2/(avp+MC^2); (*collins FF width*)
 
 (*Collins function with DGLAP Evolution*)
 
