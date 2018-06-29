@@ -136,8 +136,8 @@ avkg::usage="avkg helicity \!\(\*SubscriptBox[\(g\), \(1\)]\)TMD width";
 ?avkg;
 avks::usage="avks \!\(\*SubsuperscriptBox[\(f\), \(1  T\), \(\[UpTee]\)]\) (Sivers function) TMD width";
 ?avks;
-avkh::usage="avkh \!\(\*SubsuperscriptBox[\(H\), \(1\), \(\[UpTee]\)]\) (Collins fragmentation function) TMD width";
-?avkh;
+avph::usage="avph \!\(\*SubsuperscriptBox[\(H\), \(1\), \(\[UpTee]\)]\) (Collins fragmentation function) TMD width";
+?avph;
 Begin["`Private`"];
 DSShplus= ReadList["./Grids/fragmentationpiplus.dat",Real,RecordLists-> True];
 DSShminus= ReadList["./Grids/fragmentationpiminus.dat",Real,RecordLists-> True];
@@ -256,7 +256,7 @@ alphaC=1.06;
 betaC=0.07;
 Mh = 0.135;
 
-avkh = avp MC^2/(avp+MC^2); (*collins FF width*)
+avph = avp MC^2/(avp+MC^2); (*collins FF width*)
 
 (*Collins function with DGLAP Evolution*)
 
@@ -594,10 +594,10 @@ avUUcosphi2PT[z_] := avp + avk z^2;
 GfactorUUcosphi2[z_, PT_] := 1/(\[Pi] avUUcosphi2PT[z]) Exp[(-PT^2/avUUcosphi2PT[z])]
 AfactorUUcosphi2[z_] := (  z Sqrt[Pi] avk)/(2 Mp  Sqrt[avUUcosphi2PT[z]]) ;
 
-FUUcosphi[pion_, x_, z_, Q2_, PT_] := (-((2 Mp)/Sqrt[Q2])) (z PT 2 Mp)/avUUcosphi2PT[z] avk/(2 Mp^2) ((4.0/9.0) f1u[x, Q2] D1u[pion, z, Q2] + (1.0/9.0) f1d[x, Q2] D1d[pion, z, Q2] + (1.0/9.0) f1s[x, Q2] D1s[pion, z, Q2]  + (4.0/9.0) f1ubar[x, Q2] D1ubar[pion, z, Q2] + (1.0/9.0) f1dbar[x, Q2] D1dbar[pion, z, Q2] + (1.0/9.0) f1sdbar[x, Q2] D1sbar[pion, z, Q2]) GfactorUUcosphi2[z, PT]
+FUUcosphi[pion_, x_, z_, Q2_, PT_] := (-((2 Mp)/Sqrt[Q2])) (z PT 2 Mp)/avUUcosphi2PT[z] avk/(2 Mp^2) ((4.0/9.0) f1u[x, Q2] D1u[pion, z, Q2] + (1.0/9.0) f1d[x, Q2] D1d[pion, z, Q2] + (1.0/9.0) f1s[x, Q2] D1s[pion, z, Q2]  + (4.0/9.0) f1ubar[x, Q2] D1ubar[pion, z, Q2] + (1.0/9.0) f1dbar[x, Q2] D1dbar[pion, z, Q2] + (1.0/9.0) f1sbar[x, Q2] D1sbar[pion, z, Q2]) GfactorUUcosphi2[z, PT]
 
 
-FUUcosphiIntegrated[pion_, x_, z_, Q2_] := (-((2 Mp)/Sqrt[Q2])) ((4.0/9.0) f1u[x, Q2] D1u[pion, z, Q2] + (1.0/9.0) f1d[x, Q2] D1d[pion, z, Q2] + (1.0/9.0) f1s[x, Q2] D1s[pion, z, Q2]  + (4.0/9.0) f1ubar[x, Q2] D1ubar[pion, z, Q2] + (1.0/9.0) f1dbar[x, Q2] D1dbar[pion, z, Q2] + (1.0/9.0) f1sdbar[x, Q2] D1sbar[pion, z, Q2]) AfactorUUcosphi2[z]
+FUUcosphiIntegrated[pion_, x_, z_, Q2_] := (-((2 Mp)/Sqrt[Q2])) ((4.0/9.0) f1u[x, Q2] D1u[pion, z, Q2] + (1.0/9.0) f1d[x, Q2] D1d[pion, z, Q2] + (1.0/9.0) f1s[x, Q2] D1s[pion, z, Q2]  + (4.0/9.0) f1ubar[x, Q2] D1ubar[pion, z, Q2] + (1.0/9.0) f1dbar[x, Q2] D1dbar[pion, z, Q2] + (1.0/9.0) f1sbar[x, Q2] D1sbar[pion, z, Q2]) AfactorUUcosphi2[z]
 
 AUUcosphi[pion_, x_, z_, Q2_, PT_] := FUUcosphi[pion, x, z, Q2, PT]/FUU[pion, x, z, Q2, PT];
 
