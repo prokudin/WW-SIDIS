@@ -659,13 +659,13 @@ CrossSectionUL[pion_,x_,z_,Q2_,PT_,energy_,phi_]:=CrossSectionUU[pion,x,z,Q2,PT,
 CrossSectionLU[pion_,x_,z_,Q2_,PT_,energy_,phi_,helicity_]:=CrossSectionUU[pion,x,z,Q2,PT,energy,phi]+0.0
  
 (* Cross Section of longitidunally polarized beam and longitidunally polarized target *)
-CrossSectionLL[pion_,x_,z_,Q2_,PT_,energy_,phi_,helicity_]:=CrossSectionUU[pion,x,z,Q2,PT,energy,phi]+coupling^2/(x y[x,Q2,energy] Q2) (1-y[x,Q2,energy]+y[x,Q2,energy]^2/2) * x *(helicity/2 p2[y[x,Q2,energy]] FLL[pion, x, z, Q2, PT] + helicity/2 Cos[phi] p4[y[x,Q2,energy]] FLLcosphi[pion, x, z, Q2, PT])
+CrossSectionLL[pion_,x_,z_,Q2_,PT_,energy_,phi_,helicity_]:=CrossSectionUU[pion,x,z,Q2,PT,energy,phi]+coupling^2/(x y[x,Q2,energy] Q2) (1-y[x,Q2,energy]+y[x,Q2,energy]^2/2) * x *(helicity p2[y[x,Q2,energy]] FLL[pion, x, z, Q2, PT] + helicity Cos[phi] p4[y[x,Q2,energy]] FLLcosphi[pion, x, z, Q2, PT])
  
 (* Cross Section of unpolarized beam and transversely polarized target *)
 CrossSectionUT[pion_,x_,z_,Q2_,PT_,energy_,phih_,phiS_]:=CrossSectionUU[pion,x,z,Q2,PT,energy,phih]+coupling^2/(x y[x,Q2,energy] Q2) (1-y[x,Q2,energy]+y[x,Q2,energy]^2/2) * x *(Sin[phih - phiS] FUTf1tperp[pion, x, z, Q2, PT] + Sin[phih + phiS] p1[y[x,Q2,energy]] FUTh1[pion, x, z, Q2, PT] + Sin[3*phih - phiS] p1[y[x,Q2,energy]] FUTh1tp[pion, x, z, Q2, PT] + Sin[phiS] p3[y[x,Q2,energy]] FUTsinphiS[pion, x, z, Q2, PT] + Sin[2*phih - phiS] p3[y[x,Q2,energy]] FUTsin2phi[pion, x, z, Q2, PT])
  
 (* Cross Section of longitudinally polarized beam and transversely polarized target *)
-CrossSectionLT[pion_,x_,z_,Q2_,PT_,energy_,phih_,phiS_,helicity_]:=CrossSectionUU[pion,x,z,Q2,PT,energy,phih]+coupling^2/(x y[x,Q2,energy] Q2) (1-y[x,Q2,energy]+y[x,Q2,energy]^2/2) * x *(helicity/2 Cos[phih - phiS] p2[y[x,Q2,energy]] FLT[pion, x, z, Q2, PT] + helicity/2 Cos[phiS] p4[y[x,Q2,energy]] FLTcosPhi[pion, x, z, Q2, PT] + helicity/2 Cos[2*phih - phiS] p4[y[x,Q2,energy]] FUTsin2phi[pion, x, z, Q2, PT])
+CrossSectionLT[pion_,x_,z_,Q2_,PT_,energy_,phih_,phiS_,helicity_]:=CrossSectionUU[pion,x,z,Q2,PT,energy,phih]+coupling^2/(x y[x,Q2,energy] Q2) (1-y[x,Q2,energy]+y[x,Q2,energy]^2/2) * x *(helicity Cos[phih - phiS] p2[y[x,Q2,energy]] FLT[pion, x, z, Q2, PT] + helicity Cos[phiS] p4[y[x,Q2,energy]] FLTcosPhi[pion, x, z, Q2, PT] + helicity Cos[2*phih - phiS] p4[y[x,Q2,energy]] FUTsin2phi[pion, x, z, Q2, PT])
  
 CrossSection[pion_,x_,z_,Q2_,PT_,energy_,phih_,phiS_,helicity_,targetpolarization_]:=Which[helicity==0 && targetpolarization=="U", CrossSectionUU[pion,x,z,Q2,PT,energy,phih],helicity==0 && targetpolarization=="L", CrossSectionUL[pion,x,z,Q2,PT,energy,phih], (helicity==1 || helicity==-1) && targetpolarization=="U", 0.0, (helicity==1 || helicity==-1) && targetpolarization=="L", CrossSectionLL[pion,x,z,Q2,PT,energy,phih,helicity], helicity==0 && targetpolarization=="T", CrossSectionUT[pion,x,z,Q2,PT,energy,phih,phiS], (helicity==1 || helicity==-1) && targetpolarization=="T", CrossSectionLT[pion,x,z,Q2,PT,energy,phih,phiS,helicity], True, Message[msg::nnarg]]
 
