@@ -136,8 +136,8 @@ avkg::usage="avkg helicity \!\(\*SubscriptBox[\(g\), \(1\)]\)TMD width";
 ?avkg;
 avks::usage="avks \!\(\*SubsuperscriptBox[\(f\), \(1  T\), \(\[UpTee]\)]\) (Sivers function) TMD width";
 ?avks;
-avkh::usage="avkh \!\(\*SubsuperscriptBox[\(H\), \(1\), \(\[UpTee]\)]\) (Collins fragmentation function) TMD width";
-?avkh;
+avph::usage="avph \!\(\*SubsuperscriptBox[\(H\), \(1\), \(\[UpTee]\)]\) (Collins fragmentation function) TMD width";
+?avph;
 Begin["`Private`"];
 DSShplus= ReadList["./Grids/fragmentationpiplus.dat",Real,RecordLists-> True];
 DSShminus= ReadList["./Grids/fragmentationpiminus.dat",Real,RecordLists-> True];
@@ -256,7 +256,7 @@ alphaC=1.06;
 betaC=0.07;
 Mh = 0.135;
 
-avkh = avp MC^2/(avp+MC^2); (*collins FF width*)
+avph = avp MC^2/(avp+MC^2); (*collins FF width*)
 
 (*Collins function with DGLAP Evolution*)
 
@@ -594,10 +594,10 @@ avUUcosphi2PT[z_] := avp + avk z^2;
 GfactorUUcosphi2[z_, PT_] := 1/(\[Pi] avUUcosphi2PT[z]) Exp[(-PT^2/avUUcosphi2PT[z])]
 AfactorUUcosphi2[z_] := (  z Sqrt[Pi] avk)/(2 Mp  Sqrt[avUUcosphi2PT[z]]) ;
 
-FUUcosphi[pion_, x_, z_, Q2_, PT_] := (-((2 Mp)/Sqrt[Q2])) (z PT 2 Mp)/avUUcosphi2PT[z] avk/(2 Mp^2) ((4.0/9.0) f1u[x, Q2] D1u[pion, z, Q2] + (1.0/9.0) f1d[x, Q2] D1d[pion, z, Q2] + (1.0/9.0) f1s[x, Q2] D1s[pion, z, Q2]  + (4.0/9.0) f1ubar[x, Q2] D1ubar[pion, z, Q2] + (1.0/9.0) f1dbar[x, Q2] D1dbar[pion, z, Q2] + (1.0/9.0) f1sdbar[x, Q2] D1sbar[pion, z, Q2]) GfactorUUcosphi2[z, PT]
+FUUcosphi[pion_, x_, z_, Q2_, PT_] := (-((2 Mp)/Sqrt[Q2])) (z PT 2 Mp)/avUUcosphi2PT[z] avk/(2 Mp^2) ((4.0/9.0) f1u[x, Q2] D1u[pion, z, Q2] + (1.0/9.0) f1d[x, Q2] D1d[pion, z, Q2] + (1.0/9.0) f1s[x, Q2] D1s[pion, z, Q2]  + (4.0/9.0) f1ubar[x, Q2] D1ubar[pion, z, Q2] + (1.0/9.0) f1dbar[x, Q2] D1dbar[pion, z, Q2] + (1.0/9.0) f1sbar[x, Q2] D1sbar[pion, z, Q2]) GfactorUUcosphi2[z, PT]
 
 
-FUUcosphiIntegrated[pion_, x_, z_, Q2_] := (-((2 Mp)/Sqrt[Q2])) ((4.0/9.0) f1u[x, Q2] D1u[pion, z, Q2] + (1.0/9.0) f1d[x, Q2] D1d[pion, z, Q2] + (1.0/9.0) f1s[x, Q2] D1s[pion, z, Q2]  + (4.0/9.0) f1ubar[x, Q2] D1ubar[pion, z, Q2] + (1.0/9.0) f1dbar[x, Q2] D1dbar[pion, z, Q2] + (1.0/9.0) f1sdbar[x, Q2] D1sbar[pion, z, Q2]) AfactorUUcosphi2[z]
+FUUcosphiIntegrated[pion_, x_, z_, Q2_] := (-((2 Mp)/Sqrt[Q2])) ((4.0/9.0) f1u[x, Q2] D1u[pion, z, Q2] + (1.0/9.0) f1d[x, Q2] D1d[pion, z, Q2] + (1.0/9.0) f1s[x, Q2] D1s[pion, z, Q2]  + (4.0/9.0) f1ubar[x, Q2] D1ubar[pion, z, Q2] + (1.0/9.0) f1dbar[x, Q2] D1dbar[pion, z, Q2] + (1.0/9.0) f1sbar[x, Q2] D1sbar[pion, z, Q2]) AfactorUUcosphi2[z]
 
 AUUcosphi[pion_, x_, z_, Q2_, PT_] := FUUcosphi[pion, x, z, Q2, PT]/FUU[pion, x, z, Q2, PT];
 
@@ -659,13 +659,13 @@ CrossSectionUL[pion_,x_,z_,Q2_,PT_,energy_,phi_]:=CrossSectionUU[pion,x,z,Q2,PT,
 CrossSectionLU[pion_,x_,z_,Q2_,PT_,energy_,phi_,helicity_]:=CrossSectionUU[pion,x,z,Q2,PT,energy,phi]+0.0
  
 (* Cross Section of longitidunally polarized beam and longitidunally polarized target *)
-CrossSectionLL[pion_,x_,z_,Q2_,PT_,energy_,phi_,helicity_]:=CrossSectionUU[pion,x,z,Q2,PT,energy,phi]+coupling^2/(x y[x,Q2,energy] Q2) (1-y[x,Q2,energy]+y[x,Q2,energy]^2/2) * x *(helicity/2 p2[y[x,Q2,energy]] FLL[pion, x, z, Q2, PT] + helicity/2 Cos[phi] p4[y[x,Q2,energy]] FLLcosphi[pion, x, z, Q2, PT])
+CrossSectionLL[pion_,x_,z_,Q2_,PT_,energy_,phi_,helicity_]:=CrossSectionUU[pion,x,z,Q2,PT,energy,phi]+coupling^2/(x y[x,Q2,energy] Q2) (1-y[x,Q2,energy]+y[x,Q2,energy]^2/2) * x *(helicity p2[y[x,Q2,energy]] FLL[pion, x, z, Q2, PT] + helicity Cos[phi] p4[y[x,Q2,energy]] FLLcosphi[pion, x, z, Q2, PT])
  
 (* Cross Section of unpolarized beam and transversely polarized target *)
 CrossSectionUT[pion_,x_,z_,Q2_,PT_,energy_,phih_,phiS_]:=CrossSectionUU[pion,x,z,Q2,PT,energy,phih]+coupling^2/(x y[x,Q2,energy] Q2) (1-y[x,Q2,energy]+y[x,Q2,energy]^2/2) * x *(Sin[phih - phiS] FUTf1tperp[pion, x, z, Q2, PT] + Sin[phih + phiS] p1[y[x,Q2,energy]] FUTh1[pion, x, z, Q2, PT] + Sin[3*phih - phiS] p1[y[x,Q2,energy]] FUTh1tp[pion, x, z, Q2, PT] + Sin[phiS] p3[y[x,Q2,energy]] FUTsinphiS[pion, x, z, Q2, PT] + Sin[2*phih - phiS] p3[y[x,Q2,energy]] FUTsin2phi[pion, x, z, Q2, PT])
  
 (* Cross Section of longitudinally polarized beam and transversely polarized target *)
-CrossSectionLT[pion_,x_,z_,Q2_,PT_,energy_,phih_,phiS_,helicity_]:=CrossSectionUU[pion,x,z,Q2,PT,energy,phih]+coupling^2/(x y[x,Q2,energy] Q2) (1-y[x,Q2,energy]+y[x,Q2,energy]^2/2) * x *(helicity/2 Cos[phih - phiS] p2[y[x,Q2,energy]] FLT[pion, x, z, Q2, PT] + helicity/2 Cos[phiS] p4[y[x,Q2,energy]] FLTcosPhi[pion, x, z, Q2, PT] + helicity/2 Cos[2*phih - phiS] p4[y[x,Q2,energy]] FUTsin2phi[pion, x, z, Q2, PT])
+CrossSectionLT[pion_,x_,z_,Q2_,PT_,energy_,phih_,phiS_,helicity_]:=CrossSectionUU[pion,x,z,Q2,PT,energy,phih]+coupling^2/(x y[x,Q2,energy] Q2) (1-y[x,Q2,energy]+y[x,Q2,energy]^2/2) * x *(helicity Cos[phih - phiS] p2[y[x,Q2,energy]] FLT[pion, x, z, Q2, PT] + helicity Cos[phiS] p4[y[x,Q2,energy]] FLTcosPhi[pion, x, z, Q2, PT] + helicity Cos[2*phih - phiS] p4[y[x,Q2,energy]] FUTsin2phi[pion, x, z, Q2, PT])
  
 CrossSection[pion_,x_,z_,Q2_,PT_,energy_,phih_,phiS_,helicity_,targetpolarization_]:=Which[helicity==0 && targetpolarization=="U", CrossSectionUU[pion,x,z,Q2,PT,energy,phih],helicity==0 && targetpolarization=="L", CrossSectionUL[pion,x,z,Q2,PT,energy,phih], (helicity==1 || helicity==-1) && targetpolarization=="U", 0.0, (helicity==1 || helicity==-1) && targetpolarization=="L", CrossSectionLL[pion,x,z,Q2,PT,energy,phih,helicity], helicity==0 && targetpolarization=="T", CrossSectionUT[pion,x,z,Q2,PT,energy,phih,phiS], (helicity==1 || helicity==-1) && targetpolarization=="T", CrossSectionLT[pion,x,z,Q2,PT,energy,phih,phiS,helicity], True, Message[msg::nnarg]]
 
