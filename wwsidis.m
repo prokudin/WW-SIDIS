@@ -7,7 +7,7 @@ Print["Package WW-SIDIS contains the set of TMDs calculated with WW approximatio
 Print["Copyright: Alexei Prokudin (PSU Berks), Kemal Tezgin (UConn), Version 1.01 (06/05/2018)"];
 Print["e-mail: prokudin@jlab.org, kemal.tezgin@uconn.edu"];
 Print["https://github.com/prokudin/WW-SIDIS"];
-Print[Style["If you use this package, please, site arXiv for this paper and https://github.com/prokudin/WW-SIDIS", Red]];
+Print[Style["If you use this package, please, site Bastami:2018xqd for this paper and https://github.com/prokudin/WW-SIDIS", Red]];
 Print["___________________________________________________________________________"];
 Print["Contains the following functions: "];
 BeginPackage["wwsidis`"];
@@ -665,7 +665,7 @@ CrossSectionLL[pion_,x_,z_,Q2_,PT_,energy_,phi_,helicity_]:=CrossSectionUU[pion,
 CrossSectionUT[pion_,x_,z_,Q2_,PT_,energy_,phih_,phiS_]:=CrossSectionUU[pion,x,z,Q2,PT,energy,phih]+coupling^2/(x y[x,Q2,energy] Q2) (1-y[x,Q2,energy]+y[x,Q2,energy]^2/2) * x *(Sin[phih - phiS] FUTf1tperp[pion, x, z, Q2, PT] + Sin[phih + phiS] p1[y[x,Q2,energy]] FUTh1[pion, x, z, Q2, PT] + Sin[3*phih - phiS] p1[y[x,Q2,energy]] FUTh1tp[pion, x, z, Q2, PT] + Sin[phiS] p3[y[x,Q2,energy]] FUTsinphiS[pion, x, z, Q2, PT] + Sin[2*phih - phiS] p3[y[x,Q2,energy]] FUTsin2phi[pion, x, z, Q2, PT])
  
 (* Cross Section of longitudinally polarized beam and transversely polarized target *)
-CrossSectionLT[pion_,x_,z_,Q2_,PT_,energy_,phih_,phiS_,helicity_]:=CrossSectionUU[pion,x,z,Q2,PT,energy,phih]+coupling^2/(x y[x,Q2,energy] Q2) (1-y[x,Q2,energy]+y[x,Q2,energy]^2/2) * x *(helicity Cos[phih - phiS] p2[y[x,Q2,energy]] FLT[pion, x, z, Q2, PT] + helicity Cos[phiS] p4[y[x,Q2,energy]] FLTcosPhi[pion, x, z, Q2, PT] + helicity Cos[2*phih - phiS] p4[y[x,Q2,energy]] FUTsin2phi[pion, x, z, Q2, PT])
+CrossSectionLT[pion_,x_,z_,Q2_,PT_,energy_,phih_,phiS_,helicity_]:=CrossSectionUU[pion,x,z,Q2,PT,energy,phih]+coupling^2/(x y[x,Q2,energy] Q2) (1-y[x,Q2,energy]+y[x,Q2,energy]^2/2) * x *(helicity Cos[phih - phiS] p2[y[x,Q2,energy]] FLT[pion, x, z, Q2, PT] + helicity Cos[phiS] p4[y[x,Q2,energy]] FLTcosPhi[pion, x, z, Q2, PT] + helicity Cos[2*phih - phiS] p4[y[x,Q2,energy]] FUTcos2phi[pion, x, z, Q2, PT])
  
 CrossSection[pion_,x_,z_,Q2_,PT_,energy_,phih_,phiS_,helicity_,targetpolarization_]:=Which[helicity==0 && targetpolarization=="U", CrossSectionUU[pion,x,z,Q2,PT,energy,phih],helicity==0 && targetpolarization=="L", CrossSectionUL[pion,x,z,Q2,PT,energy,phih], (helicity==1 || helicity==-1) && targetpolarization=="U", 0.0, (helicity==1 || helicity==-1) && targetpolarization=="L", CrossSectionLL[pion,x,z,Q2,PT,energy,phih,helicity], helicity==0 && targetpolarization=="T", CrossSectionUT[pion,x,z,Q2,PT,energy,phih,phiS], (helicity==1 || helicity==-1) && targetpolarization=="T", CrossSectionLT[pion,x,z,Q2,PT,energy,phih,phiS,helicity], True, Message[msg::nnarg]]
 
