@@ -339,7 +339,7 @@ h1TperpdSecondMoment[x_,Q2_]:=1/(2 Mp^2 MTT^2) hdTT[x,Q2] avkTT^3/avk;
 
 (*2010 fit Barone et al Appendix A. 5 [0912.5194]. https://arxiv.org/pdf/0912.5194.pdf*)
 MsBM=Sqrt[0.34];
-avksBM=avk Ms^2/(avk +Ms^2);
+avksBM=avk MsBM^2/(avk +MsBM^2);
 avkBM =avksBM;
 NuBM=2.1*0.35;
 NuseaBM=-1.*0.04;
