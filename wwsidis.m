@@ -381,26 +381,70 @@ h1perpsbTMD[x_,Q2_,kt_]:=-(Mp/Ms) Sqrt[2 E]sbarsivBM[x,Q2]1/(\[Pi] avk) Exp[-kt^
 
 
 (*WW-type relations*)
- 
+(*use grid to speed up*)
+Clear[grid,TableU,TableD,xh1Lp1u,xh1Lp1d,h1Lu,h1Ld];
+grid=ReadList["./Grids/xh1Lperp_u_d.dat",Real,RecordLists-> True];
+TableU= Table[{{grid[[i,1]],grid[[i,2]]},grid[[i,3]]},{i,1,Length[grid]}];
+TableD= Table[{{grid[[i,1]],grid[[i,2]]},grid[[i,4]]},{i,1,Length[grid]}];
+xh1Lp1u=Interpolation[TableU];
+xh1Lp1d=Interpolation[TableD];
+
+h1Lu[x_,Q2_]:=xh1Lp1u[x,Q2]/x  ; 
+h1Ld[x_,Q2_]:=xh1Lp1d[x,Q2]/x   ; 
+(*
 h1Lu[x_, Q_] := -x^2 NIntegrate[h1u[y, Q]/y^2, {y, x, 1.}];
 h1Ld[x_, Q_] := -x^2  NIntegrate[h1d[y, Q]/y^2, {y, x, 1.}];
+*)
 
+
+Clear[grid,TableU,TableD,TableUBAR,TableDBAR, TableS,TableSBAR];
+grid=ReadList["./Grids/gT_u_d_ubar_dbar_s_sbar.dat",Real,RecordLists-> True];
+TableU= Table[{{grid[[i,1]],grid[[i,2]]},grid[[i,3]]},{i,1,Length[grid]}];
+TableD= Table[{{grid[[i,1]],grid[[i,2]]},grid[[i,4]]},{i,1,Length[grid]}];
+TableUBAR= Table[{{grid[[i,1]],grid[[i,2]]},grid[[i,5]]},{i,1,Length[grid]}];
+TableDBAR= Table[{{grid[[i,1]],grid[[i,2]]},grid[[i,6]]},{i,1,Length[grid]}];
+TableS= Table[{{grid[[i,1]],grid[[i,2]]},grid[[i,5]]},{i,1,Length[grid]}];
+TableSBAR= Table[{{grid[[i,1]],grid[[i,2]]},grid[[i,6]]},{i,1,Length[grid]}];
+xgTu=Interpolation[TableU];
+xgTd=Interpolation[TableD];
+xgTubar=Interpolation[TableUBAR];
+xgTdbar=Interpolation[TableDBAR];
+xgTs=Interpolation[TableUBAR];
+xgTsbar=Interpolation[TableDBAR];
+
+gTu[x_,Q2_]:=xgTu[x,Q2]/x ;  
+gTd[x_,Q2_]:=xgTd[x,Q2]/x ;  
+ gTubar[x_,Q2_] := xgTubar[x,Q2]/x ;
+gTdbar[x_,Q2_] := xgTdbar[x,Q2]/x ;
+gTs[x_,Q2_] := xgTs[x,Q2]/x ;
+gTsbar[x_,Q2_] := xgTsbar[x,Q2]/x ;
 (*Eq. 3.2 (a)*)
+(*
 gTu[x_,Q2_] := NIntegrate[g1u[y,Q2]/y,{y,x,1.}];
 gTd[x_,Q2_] := NIntegrate[g1d[y,Q2]/y,{y,x,1.}];
 gTubar[x_,Q2_] := NIntegrate[g1ubar[y,Q2]/y,{y,x,1.}];
 gTdbar[x_,Q2_] := NIntegrate[g1dbar[y,Q2]/y,{y,x,1.}];
 gTs[x_,Q2_] := NIntegrate[g1s[y,Q2]/y,{y,x,1.}];
 gTsbar[x_,Q2_] := NIntegrate[g1sbar[y,Q2]/y,{y,x,1.}];
+*)
+
+
+g1Tperpu[x_,Q2_] := x gTu[x,Q2];
+g1Tperpd[x_,Q2_] := x gTd[x,Q2];
+g1Tperpubar[x_,Q2_] := x gTubar[x,Q2];
+g1Tperpdbar[x_,Q2_] := x gTdbar[x,Q2];
+g1Tperps[x_,Q2_] := x gTs[x,Q2];
+g1Tperpsbar[x_,Q2_] := x gTsbar[x,Q2];
 
 (*Eq. 3.6 (a)*)
+(*
 g1Tperpu[x_,Q2_] := x NIntegrate[g1u[y,Q2]/y,{y,x,1.}];
 g1Tperpd[x_,Q2_] := x NIntegrate[g1d[y,Q2]/y,{y,x,1.}];
 g1Tperpubar[x_,Q2_] := x NIntegrate[g1ubar[y,Q2]/y,{y,x,1.}];
 g1Tperpdbar[x_,Q2_] := x NIntegrate[g1dbar[y,Q2]/y,{y,x,1.}];
 g1Tperps[x_,Q2_] := x NIntegrate[g1s[y,Q2]/y,{y,x,1.}];
 g1Tperpsbar[x_,Q2_] := x NIntegrate[g1sbar[y,Q2]/y,{y,x,1.}];
- 
+*)
 
  
 
